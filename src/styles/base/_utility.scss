@@ -1,0 +1,43 @@
+.flex {
+    display: flex;
+    gap: var(--gap, 1rem);
+}
+
+.flow > *:where(:not(:first-child)) {
+    margin-top: var(--flow-space, 1rem);
+}
+
+.grid {
+    display: grid;
+    gap: var(--gap, 1rem);
+}
+
+.container {
+    padding-inline: 2em;
+    margin-inline: auto;
+    max-width: 80rem;
+}
+
+.sr-only {
+  position: absolute; 
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px; 
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap; 
+  border: 0;
+}
+
+.bg-white { background-color: hsl( var(--clr-white) );}
+.bg-dark { background-color: hsl( var(--clr-dark) );}
+.bg-accent-dark { background-color: hsl( var(--clr-accent-dark) );}
+.bg-accent-light { background-color: hsl( var(--clr-accent-light) );}
+.bg-red { background-color: hsl( var(--clr-red) );}
+.bg-yellow { background-color: hsl( var(--clr-yellow) );}
+
+.text-white { color: hsl( var(--clr-white) );}
+.text-dark { color: hsl( var(--clr-dark) );}
+
+.uppercase{ text-transform: uppercase;}
