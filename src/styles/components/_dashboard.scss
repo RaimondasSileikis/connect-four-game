@@ -1,0 +1,24 @@
+.dashboard .d1 {
+    z-index: -1;
+    position: relative;
+}
+
+.dashboard .d2 {
+    z-index: 100;
+    position: absolute;
+}
+.counters * {
+    width: 88px;
+    height: 88px;
+    
+    
+}
+
+.counters {
+    display: grid;
+    width: 632px;
+    margin-top: 0rem;
+    padding: 0.5rem;
+    grid-template-columns: repeat(7, 1fr);
+    position: absolute;
+}

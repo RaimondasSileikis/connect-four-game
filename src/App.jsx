@@ -1,10 +1,21 @@
-import './App.css';
+// import './App.css';
 import './styles/index.scss';
-
+import BtnPlayVsCpu from './components/BtnPlayVsCpu'
+import BtnPlayVsPlayer from './components/BtnPlayVsPlayer';
+import BtnMenu from './components/BtnMenu';
+import BtnCheck from './components/BtnCheck';
+import Dashboard from './components/Dashboard';
 function App() {
   return (
     <div className="App">
     
+   
+    <BtnPlayVsCpu/>
+    <BtnPlayVsPlayer/>
+    <BtnMenu/>
+    <BtnCheck/>
+    <Dashboard/>
+
    Main menu start
 
    Play vs player

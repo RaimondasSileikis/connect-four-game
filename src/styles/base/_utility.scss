@@ -3,6 +3,13 @@
     gap: var(--gap, 1rem);
 }
 
+.flex-center {
+    justify-content: center;
+}
+.flex-space-between {
+    justify-content:space-between;
+}
+
 .flow > *:where(:not(:first-child)) {
     margin-top: var(--flow-space, 1rem);
 }
@@ -31,13 +38,13 @@
 }
 
 .bg-white { background-color: hsl( var(--clr-white) );}
-.bg-dark { background-color: hsl( var(--clr-dark) );}
-.bg-accent-dark { background-color: hsl( var(--clr-accent-dark) );}
-.bg-accent-light { background-color: hsl( var(--clr-accent-light) );}
+.bg-dark { background-color: hsl( var(--clr-black) );}
+.bg-blue-dark { background-color: hsl( var(--clr-blue-dark) );}
+.bg-blue-light { background-color: hsl( var(--clr-blue-light) );}
 .bg-red { background-color: hsl( var(--clr-red) );}
 .bg-yellow { background-color: hsl( var(--clr-yellow) );}
 
 .text-white { color: hsl( var(--clr-white) );}
-.text-dark { color: hsl( var(--clr-dark) );}
+.text-dark { color: hsl( var(--clr-black) );}
 
 .uppercase{ text-transform: uppercase;}

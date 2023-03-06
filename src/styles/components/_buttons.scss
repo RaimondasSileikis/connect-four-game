@@ -1,0 +1,48 @@
+.btn-play {
+    display: flex;
+    align-items: center;
+    width: 25rem;
+    padding: 0.8em;
+    text-transform: uppercase;
+    border: 3px solid hsl( var(--clr-black) );
+    box-shadow: 0px 10px 0px hsl( var(--clr-black) );
+    border-radius: 1.25rem;
+}
+.btn-play:hover {
+    box-shadow: 0px 10px 0px hsl( var(--clr-blue-dark) );
+}
+
+.btn-menu {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: fit-content;
+    text-transform: uppercase;
+    padding: 0.6em 1.2em;
+    border-radius: 1.25rem;
+    color:hsl( var(--clr-white) ) ;
+    background-color: hsl( var(--clr-blue-dark) );
+}
+
+.btn-menu:hover {
+    background-color: hsl( var(--clr-red) );
+}
+
+.btn-check :first-child {
+    display: block;
+
+}
+.btn-check :last-child {
+    display: none;
+}
+
+.btn-check:hover :last-child {
+    display: block;
+}
+
+.btn-check:hover :first-child {
+    display: none;
+}
+
+
+
