@@ -1,0 +1,36 @@
+
+.home {
+    display: grid;
+    position: relative;
+    justify-items: center;
+    background-color: hsl( var(--clr-blue-light) );
+    grid-template-rows: 10vh minmax(80vh, 1fr) 10vh;
+    grid-template-areas: 
+        'header'
+        'container'
+        'footer';
+}
+
+.header {
+    display: flex;
+    
+    grid-area: header;
+   
+    align-items: center;
+    margin:0rem 0;
+    padding: 5rem 0;
+   
+}
+
+.logo {
+    padding: 1rem 11.5rem;
+}
+
+
+
+.container {
+    display: flex;
+    align-items: center;
+    grid-area: container;
+    gap:2rem;
+}

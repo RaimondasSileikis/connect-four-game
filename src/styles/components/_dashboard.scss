@@ -1,24 +1,25 @@
+.dashboard {
+    min-width: 632px;
+}
+
 .dashboard .d1 {
-    z-index: -1;
+    z-index: 10;
     position: relative;
+    min-width: 632px;
 }
 
 .dashboard .d2 {
-    z-index: 100;
+    z-index: 30;
     position: absolute;
-}
-.counters * {
-    width: 88px;
-    height: 88px;
-    
-    
+    min-width: 632px;
 }
 
 .counters {
     display: grid;
     width: 632px;
-    margin-top: 0rem;
-    padding: 0.5rem;
-    grid-template-columns: repeat(7, 1fr);
+    margin: 1rem 0 0 1.1rem;
+    grid-template-columns: repeat(7, 88px);
+    grid-template-rows: repeat(6, 88px);
     position: absolute;
+    z-index: 20;
 }

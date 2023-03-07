@@ -45,4 +45,38 @@
 }
 
 
+.btn-player-1 {
+    flex-direction: column;
+    width: max-content;
+    position: relative;
+    padding: 3rem 2rem 1rem 2rem;
+    img {
+        position: absolute;
+        top: 0;
+        transform: translatey(-50%);
+    }
+}
 
+.turn {
+    display: grid;
+    grid-area: footer;
+    position:absolute;
+    place-self: stretch;
+    justify-content: center;
+    background-color: hsl( var(--clr-blue-dark) );
+    border-radius: 60px 60px 0px 0px;
+    width: 100%;
+    padding: 3rem 0;
+    bottom: 0;
+    .turn-time {
+        position: absolute;
+        place-self: center;
+        z-index: 40;
+    }
+    img {
+        z-index: 30;
+    }
+}
+.turn-player1 {
+    color: hsl( var(--clr-white) );
+}

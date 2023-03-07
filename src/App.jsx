@@ -1,21 +1,17 @@
 // import './App.css';
 import './styles/index.scss';
-import BtnPlayVsCpu from './components/BtnPlayVsCpu'
-import BtnPlayVsPlayer from './components/BtnPlayVsPlayer';
-import BtnMenu from './components/BtnMenu';
-import BtnCheck from './components/BtnCheck';
-import Dashboard from './components/Dashboard';
+
+import Home from './pages/Home';
+
+
 function App() {
   return (
-    <div className="App">
+    <div className="App ">
     
-   
-    <BtnPlayVsCpu/>
-    <BtnPlayVsPlayer/>
-    <BtnMenu/>
-    <BtnCheck/>
-    <Dashboard/>
+  <Home/>
 
+   
+{/* 
    Main menu start
 
    Play vs player
@@ -65,7 +61,7 @@ function App() {
   Wins
   Play again
 
-  Game board end
+  Game board end */}
     </div>
   );
 }
