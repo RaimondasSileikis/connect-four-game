@@ -1,8 +1,8 @@
-export default function BtnRestart() {
+export default function BtnRestart({restartNewTable}) {
     
     return (
 
-    <div className='btn-menu'>
+    <div onClick={restartNewTable} className='btn-menu'>
         <h4>restart</h4>
     </div>
 

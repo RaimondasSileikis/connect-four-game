@@ -24,67 +24,28 @@ import turn_background_yellow from '../assets/images/turn-background-yellow.svg'
 
 import board_layer_black_large from '../assets/images/board-layer-black-large.svg';
 import board_layer_white_large from '../assets/images/board-layer-white-large.svg';
+import Discs from './Discs';
 
 
+export default function Dashboard({ discs, putDiscs}) {
 
-
-
-export default function Dashboard() {
-    
     return (
 <>
     <div className='dashboard flex'>
+
         <img className='d1' src={board_layer_black_large} alt="Dashboard" />
         <img className='d2' src={board_layer_white_large} alt="Dashboard" />
-        {/* <img src={counter_red_large} alt="Counter red" /> */}
-       
     
     <div className='counters'>
-    <img src={counter_red_large} alt="Counter red" />
-    <img src={counter_red_large} alt="Counter red" />
-    <img src={counter_red_large} alt="Counter red" />
-    <img src={counter_red_large} alt="Counter red" />
-    <img src={counter_red_large} alt="Counter red" />
-    <img src={counter_red_large} alt="Counter red" />
-    <img src={counter_red_large} alt="Counter red" />
-    
-    <img src={counter_red_large} alt="Counter red" />
-    <img src={counter_red_large} alt="Counter red" />
-    <img src={counter_red_large} alt="Counter red" />
-    <img src={counter_red_large} alt="Counter red" />
-    <img src={counter_red_large} alt="Counter red" />
-    <img src={counter_red_large} alt="Counter red" />
-    <img src={counter_red_large} alt="Counter red" />
-    <img src={counter_red_large} alt="Counter red" />
-    <img src={counter_red_large} alt="Counter red" />
-    <img src={counter_red_large} alt="Counter red" />
-    <img src={counter_red_large} alt="Counter red" />
-    <img src={counter_red_large} alt="Counter red" />
-    <img src={counter_red_large} alt="Counter red" />
-    <img src={counter_red_large} alt="Counter red" />
-    <img src={counter_red_large} alt="Counter red" />
-    <img src={counter_red_large} alt="Counter red" />
-    <img src={counter_red_large} alt="Counter red" />
-    <img src={counter_red_large} alt="Counter red" />
-    <img src={counter_red_large} alt="Counter red" />
-    <img src={counter_red_large} alt="Counter red" />
-    <img src={counter_red_large} alt="Counter red" />
-    <img src={counter_red_large} alt="Counter red" />
-    <img src={counter_red_large} alt="Counter red" />
-    <img src={counter_red_large} alt="Counter red" />
-    <img src={counter_red_large} alt="Counter red" />
-    <img src={counter_red_large} alt="Counter red" />
-    <img src={counter_red_large} alt="Counter red" />
-    <img src={counter_red_large} alt="Counter red" />
-    <img src={counter_red_large} alt="Counter red" />
-    <img src={counter_red_large} alt="Counter red" />
-    <img src={counter_red_large} alt="Counter red" />
-    <img src={counter_red_large} alt="Counter red" />
-    <img src={counter_red_large} alt="Counter red" />
-    <img src={counter_red_large} alt="Counter red" />
-    <img src={counter_red_large} alt="Counter red" />
-    
-    
+
+   {
+
+        discs.map((disc, i) =>
+            <Discs key={i} player={disc.player} isFree={disc.isFree} putDiscs={() => putDiscs(disc.id)}  />
+
+
+        )
+    } 
 
     </div> 
 

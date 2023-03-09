@@ -1,4 +1,3 @@
-
 import logo from '../assets/images/logo.svg';
 
 import BtnMenu from '../components/BtnMenu';
@@ -9,8 +8,10 @@ import BtnRestart from '../components/BtnRestart';
 import TurnPlayer1 from '../components/TurnPlayer1';
 
 
-export default function Home() {
+export default function Home({discs, setDiscs, restartNewTable, putDiscs}) {
     
+
+
     return (
         <div className='home'>
             <header className='header flex'>
@@ -18,17 +19,17 @@ export default function Home() {
                 <div className='logo'>
                     <img src={logo} alt="" />
                 </div>
-                <BtnRestart/>
+                <BtnRestart  restartNewTable={restartNewTable} />
                
             </header>
 
             <main className='container'>
-                <BtnPlayer1/>
-                <Dashboard></Dashboard>
+                <BtnPlayer1 />
+                <Dashboard discs={discs} setDiscs={setDiscs} putDiscs={putDiscs}></Dashboard>
                 <BtnPlayer2/>
 
             </main>
-            
+
             <TurnPlayer1/>
           
         </div>

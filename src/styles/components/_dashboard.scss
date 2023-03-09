@@ -16,10 +16,25 @@
 
 .counters {
     display: grid;
-    width: 632px;
-    margin: 1rem 0 0 1.1rem;
+    // width: 632px;
+    gap: 0rem;
+    margin: 1.1rem 0 0 1.1rem;
     grid-template-columns: repeat(7, 88px);
     grid-template-rows: repeat(6, 88px);
     position: absolute;
-    z-index: 20;
+    // z-index: 20;
+    button {
+        // z-index: 40; 
+        background-color: transparent;
+       border-radius: 50%;
+       width: 80%;
+       height: 80%;
+       background-size: cover;
+        background-repeat: no-repeat;
+    }
+    h4 {
+       
+        
+    }
+ 
 }
