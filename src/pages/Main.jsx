@@ -28,12 +28,12 @@ export default function Main({
                 <div className='logo'>
                     <img src={logo} alt="" />
                 </div>
-                <BtnRestart  restartNewTable={restartNewTable} />
+                <BtnRestart restartNewTable={restartNewTable} />
             </header>
 
             <main className='container'>
                 <CounterBox1 counterPlayer1={counterPlayer1} />
-                <Dashboard 
+                <Dashboard
                     discs={discs}
                     selectDisc={selectDisc}
                     winnerDiscs={winnerDiscs}
