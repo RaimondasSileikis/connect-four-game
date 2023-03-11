@@ -4,12 +4,19 @@
     width: 25rem;
     padding: 0.8em;
     text-transform: uppercase;
+    color: hsl( var(--clr-black) );
     border: 3px solid hsl( var(--clr-black) );
     box-shadow: 0px 10px 0px hsl( var(--clr-black) );
     border-radius: 1.25rem;
+    
 }
 .btn-play:hover {
     box-shadow: 0px 10px 0px hsl( var(--clr-blue-dark) );
+}
+
+.game-rules {
+    height: 4.5rem;
+    cursor: pointer;
 }
 
 .btn-menu {
@@ -22,11 +29,17 @@
     border-radius: 1.25rem;
     color:hsl( var(--clr-white) ) ;
     background-color: hsl( var(--clr-blue-dark) );
+    cursor: pointer;
 }
 
 .btn-menu:hover {
     background-color: hsl( var(--clr-red) );
     cursor: pointer;
+}
+
+.btn-check  {
+  display: flex;
+  justify-content: center;
 }
 
 .btn-check :first-child {

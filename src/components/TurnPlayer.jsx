@@ -43,6 +43,5 @@ export default function TurnPlayer({
                 </div>
             </div>
         </div>
-
     )
 };

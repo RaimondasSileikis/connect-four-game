@@ -1,5 +1,4 @@
 import logo from '../assets/images/logo.svg';
-
 import BtnMenu from '../components/BtnMenu';
 import Dashboard from '../components/Dashboard';
 import CounterBox1 from '../components/CounterBox1';
@@ -7,8 +6,7 @@ import CounterBox2 from '../components/CounterBox2';
 import BtnRestart from '../components/BtnRestart';
 import TurnPlayer from '../components/TurnPlayer';
 
-
-export default function Home({ 
+export default function Main({ 
     discs,
     winnerPlayer,
     winnerDiscs,
@@ -23,16 +21,14 @@ export default function Home({
     counterPlayer2
     }) {
     
-
     return (
-        <div className='home'>
+        <div className='main'>
             <header className='header flex'>
-                <BtnMenu/>
+                <BtnMenu restartNewTable={restartNewTable} />
                 <div className='logo'>
                     <img src={logo} alt="" />
                 </div>
                 <BtnRestart  restartNewTable={restartNewTable} />
-               
             </header>
 
             <main className='container'>
@@ -42,10 +38,8 @@ export default function Home({
                     selectDisc={selectDisc}
                     winnerDiscs={winnerDiscs}
                     playerOn={ playerOn} 
-                    columnValue={columnValue}
-                ></Dashboard>
+                    columnValue={columnValue} />
                 <CounterBox2 counterPlayer2={counterPlayer2}/>
-
             </main>
 
             <TurnPlayer 

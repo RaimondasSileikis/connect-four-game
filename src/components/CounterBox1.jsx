@@ -1,6 +1,4 @@
 import player_one from '../assets/images/player-one.svg';
-import player_two from '../assets/images/player-two.svg';
-import player_vs_cpu from '../assets/images/player-vs-cpu.svg';
 
 export default function CounterBox1({counterPlayer1}) {
     

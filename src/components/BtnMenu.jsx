@@ -1,10 +1,12 @@
-export default function BtnMenu() {
+import { Link } from "react-router-dom";
+
+export default function BtnMenu({restartNewTable}) {
     
     return (
-
-    <div className='btn-menu'>
-        <h4>meniu</h4>
-    </div>
-
+        <Link to="/">
+        <div onClick={restartNewTable} className='btn-menu'>
+                <h4>meniu</h4>
+            </div>
+        </Link>
     )
 };

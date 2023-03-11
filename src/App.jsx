@@ -1,11 +1,10 @@
-import './styles/index.scss';
-
-import Home from './pages/Home';
-import { useEffect, useState, useRef  } from 'react';
+import { BrowserRouter, Route, Routes } from 'react-router-dom';
+import { useEffect, useState, useRef} from 'react';
 import { nanoid } from 'nanoid';
-
-
-
+import './styles/index.scss';
+import Main from './pages/Main';
+import StartPage from './pages/StartPage';
+import RulesPage from './pages/RulesPage';
 
 function App() {
 
@@ -250,23 +249,29 @@ function diagonalCondition() {
 
   return (
     <div className="App ">
-    
-   
-  <Home 
-        columnValue={columnValue}
-        counterPlayer1={counterPlayer1}
-        counterPlayer2={counterPlayer2}
-        winnerPlayer={winnerPlayer} 
-        winnerDiscs={winnerDiscs}
-        playAgain={playAgain}
-        playerOn={playerOn}
-        discs={discs}
-        restartNewTable={restartNewTable}
-        selectDisc={selectDisc}
-        timePlayer1={timePlayer1}
-        timePlayer2={timePlayer2}
-    />
+      <BrowserRouter>
+        <Routes>
 
+        <Route path="/"  element={<StartPage/>}/>
+        <Route path="/rules"  element={<RulesPage/>}/>
+        <Route path="/play" element={
+          <Main
+            columnValue={columnValue}
+            counterPlayer1={counterPlayer1}
+            counterPlayer2={counterPlayer2}
+            winnerPlayer={winnerPlayer} 
+            winnerDiscs={winnerDiscs}
+            playAgain={playAgain}
+            playerOn={playerOn}
+            discs={discs}
+            restartNewTable={restartNewTable}
+            selectDisc={selectDisc}
+            timePlayer1={timePlayer1}
+            timePlayer2={timePlayer2}/>
+        }/>
+
+        </Routes>
+      </BrowserRouter>
     </div>
   );
 }

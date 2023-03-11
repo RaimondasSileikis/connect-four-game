@@ -3,7 +3,6 @@
 }
 .dashboard > .discs > .disc:hover{
     cursor: pointer;
-  
 }
 
 .dashboard *:hover {
@@ -40,7 +39,6 @@
 
 .discs {
     display: grid;
-    // width: 632px;
     gap: 0rem;
     margin: 0.5rem 0 0 0.5rem;
     align-items: center;
@@ -66,7 +64,6 @@
             transform: translate(-50%, -50%);
         }
     }
-    
 }
 
 .player-box {

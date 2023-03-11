@@ -1,12 +1,10 @@
 @import '/src/styles/base/reset';
-@import '/src/styles/base/variables.scss';
 @import '/src/styles/base/utility';
-@import '/src/styles/base/common';
+@import '/src/styles/base/variables.scss';
 
 @import '/src/styles/components/buttons';
-@import '/src/styles/components/turnPlayer';
 @import '/src/styles/components/dashboard';
+@import '/src/styles/components/turnPlayer';
 
 @import '/src/styles/pages/home';
-
-
+@import '/src/styles/pages/main';

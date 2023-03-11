@@ -72,6 +72,9 @@ select {
     font: inherit;
 }
 
+a {
+    text-decoration: none;
+}
 @media (prefers-reduced-motion: reduce) {  
     *,
     *::before,
