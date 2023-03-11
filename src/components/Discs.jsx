@@ -3,27 +3,40 @@ import counter_red_small from '../assets/images/counter-red-small.svg';
 import counter_yellow_large from '../assets/images/counter-yellow-large.svg';
 import counter_yellow_small from '../assets/images/counter-yellow-small.svg';
 
-export default function Discs(props) {
+import marker_red from '../assets/images/marker-red.svg';
+import marker_yellow from '../assets/images/marker-yellow.svg';
 
-const player1 = `url(${counter_red_large})`;
-const player2 = `url(${counter_yellow_large})`;
-const players = [player1, player2];
+export default function Discs({player,isFree, id, winnerDiscs, selectDisc}) {
 
-
-    const styles = 
-    { 
-        backgroundImage: !props.isFree === true ? players[props.player - 1]: "none",
-        zIndex: props.isFree ? "30" : "20",
   
-      }
+
+    function styleWinnerDisc( i) {
+        const visibility = { visibility: id === winnerDiscs[i]
+            ? 'visible' : 'hidden'};
+            return visibility
+    }
+
+   
+
+    const player1 = `url(${counter_red_large})`;
+    const player2 = `url(${counter_yellow_large})`;
+    const players = [player1, player2];
+
+
+    const styleDisc = { 
+        backgroundImage: !isFree === true ? players[player - 1]: "none",
+        zIndex: isFree ? "30" : "20",
+    }
 
     return (
-
-        <button    
-            onClick={props.putDiscs}
-            style={styles}>
-            <h4>{props.player}</h4>
+     
+        <button className='disc' onClick={selectDisc} style={styleDisc}>
+            <span  style={styleWinnerDisc( 0)} > </span>
+            <span  style={styleWinnerDisc( 1)} > </span>
+            <span  style={styleWinnerDisc( 2)} > </span>
+            <span  style={styleWinnerDisc( 3)} > </span>
+       
         </button>
-
+       
     )
 };

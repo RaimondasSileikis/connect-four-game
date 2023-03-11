@@ -1,0 +1,54 @@
+.turn {
+    display: grid;
+    grid-area: footer;
+    position:absolute;
+    place-self: stretch;
+    justify-content: center;
+    background-color: hsl( var(--clr-blue-dark) );
+    border-radius: 60px 60px 0px 0px;
+    width: 100%;
+    padding: 2rem 0;
+    bottom: 0;
+    .turn-time {
+        position: absolute;
+        place-self: center;
+        z-index:70;
+    }
+   
+        :not(first-child) {
+            text-align: center;
+            z-index: 60;
+        }
+
+}
+.turn-player1 {
+    color: hsl( var(--clr-white) );
+}
+
+.turn-player2 {
+    color: hsl( var(--clr-black) );
+    
+}
+.wins-player1 {
+    color: hsl( var(--clr-black) );
+    background-color: hsl( var(--clr-red) );
+}
+.wins-player2 {
+    background-color: hsl( var(--clr-yellow) );
+}
+
+.player-wins {
+    flex-direction: column;
+    place-self: center;
+    padding: 0.8em;
+    
+    color:hsl( var(--clr-black) );
+    background-color:hsl( var(--clr-white) );
+    z-index: 60;
+    h1 {
+        padding: 0 1em;
+    }
+}
+.btn-playagain {
+    background-color:hsl( var(--clr-blue-dark) );
+}

@@ -26,11 +26,12 @@
 
 .btn-menu:hover {
     background-color: hsl( var(--clr-red) );
+    cursor: pointer;
 }
 
 .btn-check :first-child {
     display: block;
-
+    
 }
 .btn-check :last-child {
     display: none;
@@ -38,23 +39,12 @@
 
 .btn-check:hover :last-child {
     display: block;
+    cursor: pointer;
 }
 
 .btn-check:hover :first-child {
     display: none;
-}
-
-
-.btn-player-1 {
-    flex-direction: column;
-    width: max-content;
-    position: relative;
-    padding: 3rem 2rem 1rem 2rem;
-    img {
-        position: absolute;
-        top: 0;
-        transform: translatey(-50%);
-    }
+    cursor: pointer;
 }
 
 .turn {
@@ -66,17 +56,42 @@
     background-color: hsl( var(--clr-blue-dark) );
     border-radius: 60px 60px 0px 0px;
     width: 100%;
-    padding: 3rem 0;
+    padding: 2rem 0;
     bottom: 0;
     .turn-time {
         position: absolute;
         place-self: center;
-        z-index: 40;
+        z-index:70;
     }
-    img {
-        z-index: 30;
-    }
+   
+        :not(first-child) {
+            z-index: 60;
+        }
+
 }
 .turn-player1 {
     color: hsl( var(--clr-white) );
+}
+
+.turn-player2 {
+    color: hsl( var(--clr-black) );
+    
+}
+.wins-player1 {
+    color: hsl( var(--clr-black) );
+    background-color: hsl( var(--clr-red) );
+}
+.wins-player2 {
+    background-color: hsl( var(--clr-yellow) );
+}
+
+.player-wins {
+    flex-direction: column;
+    place-self: center;
+    color:hsl( var(--clr-black) );
+    background-color:hsl( var(--clr-white) );
+    z-index: 60;
+}
+.btn-playagain {
+    background-color:hsl( var(--clr-blue-dark) );
 }

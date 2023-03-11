@@ -2,15 +2,27 @@ import logo from '../assets/images/logo.svg';
 
 import BtnMenu from '../components/BtnMenu';
 import Dashboard from '../components/Dashboard';
-import BtnPlayer1 from '../components/BtnPlayer1';
-import BtnPlayer2 from '../components/BtnPlayer2';
+import CounterBox1 from '../components/CounterBox1';
+import CounterBox2 from '../components/CounterBox2';
 import BtnRestart from '../components/BtnRestart';
-import TurnPlayer1 from '../components/TurnPlayer1';
+import TurnPlayer from '../components/TurnPlayer';
 
 
-export default function Home({discs, setDiscs, restartNewTable, putDiscs}) {
+export default function Home({ 
+    discs,
+    winnerPlayer,
+    winnerDiscs,
+    playAgain,
+    restartNewTable,
+    selectDisc,
+    playerOn,
+    columnValue,
+    timePlayer1,
+    timePlayer2,
+    counterPlayer1,
+    counterPlayer2
+    }) {
     
-
 
     return (
         <div className='home'>
@@ -24,14 +36,24 @@ export default function Home({discs, setDiscs, restartNewTable, putDiscs}) {
             </header>
 
             <main className='container'>
-                <BtnPlayer1 />
-                <Dashboard discs={discs} setDiscs={setDiscs} putDiscs={putDiscs}></Dashboard>
-                <BtnPlayer2/>
+                <CounterBox1 counterPlayer1={counterPlayer1} />
+                <Dashboard 
+                    discs={discs}
+                    selectDisc={selectDisc}
+                    winnerDiscs={winnerDiscs}
+                    playerOn={ playerOn} 
+                    columnValue={columnValue}
+                ></Dashboard>
+                <CounterBox2 counterPlayer2={counterPlayer2}/>
 
             </main>
 
-            <TurnPlayer1/>
-          
+            <TurnPlayer 
+                playAgain={playAgain} 
+                winnerPlayer={winnerPlayer} 
+                playerOn={playerOn} 
+                timePlayer1={timePlayer1} 
+                timePlayer2={timePlayer2} />
         </div>
     )
 };

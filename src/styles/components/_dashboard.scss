@@ -1,6 +1,14 @@
 .dashboard {
     min-width: 632px;
 }
+.dashboard > .discs > .disc:hover{
+    cursor: pointer;
+  
+}
+
+.dashboard *:hover {
+    cursor: pointer;
+}
 
 .dashboard .d1 {
     z-index: 10;
@@ -13,28 +21,72 @@
     position: absolute;
     min-width: 632px;
 }
+.cursor {
+    display: grid;
+    grid-template-columns: repeat(7, 88px);
+    grid-template-rows:  88px;
+    position: absolute;
+    top: -4.2rem;
+    background-repeat: no-repeat;
+    justify-items: stretch;
+}
 
-.counters {
+.cursor * {
+    background-size: cover;
+    background-repeat: no-repeat;
+    margin: 2rem;
+    visibility: hidden;
+}
+
+.discs {
     display: grid;
     // width: 632px;
     gap: 0rem;
-    margin: 1.1rem 0 0 1.1rem;
+    margin: 0.5rem 0 0 0.5rem;
+    align-items: center;
+    justify-items: center;
     grid-template-columns: repeat(7, 88px);
     grid-template-rows: repeat(6, 88px);
     position: absolute;
-    // z-index: 20;
     button {
-        // z-index: 40; 
         background-color: transparent;
-       border-radius: 50%;
-       width: 80%;
-       height: 80%;
-       background-size: cover;
+        border-radius: 50%;
+        width: 80%;
+        height: 80%;
+        background-size: cover;
         background-repeat: no-repeat;
+    
+         span {
+            position: absolute;
+            visibility: hidden;
+            width: 2.125rem;
+            height: 2.1125rem;
+            border-radius: 50%;
+            border: 6px solid hsl( var(--clr-white) );
+            transform: translate(-50%, -50%);
+        }
     }
-    h4 {
-       
-        
+    
+}
+
+.player-box {
+    display: flex;
+    align-items: center;
+    width: max-content;
+    text-transform: uppercase;
+    border: 3px solid hsl( var(--clr-black) );
+    box-shadow: 0px 10px 0px hsl( var(--clr-black) );
+    border-radius: 1.25rem;
+}
+
+.counter-box {
+    flex-direction: column;
+    width: max-content;
+    position: relative;
+    padding: 3rem 2rem 1rem 2rem;
+    img {
+        position: absolute;
+        top: 0;
+        transform: translatey(-50%);
     }
- 
 }

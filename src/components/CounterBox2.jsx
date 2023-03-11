@@ -29,13 +29,13 @@ import board_layer_white_large from '../assets/images/board-layer-white-large.sv
 
 
 
-export default function BtnPlayer1() {
+export default function CounterBox2({counterPlayer2}) {
     
     return (
-         <button className='btn-play btn-player-1 '>
-             <img src={player_one } alt="" />
-                    <h3 className='uppercase'>player 1</h3>
-                    <h1>0</h1>
+         <button className='player-box counter-box '>
+             <img src={player_two } alt="" />
+                    <h3 className='uppercase'>player 2</h3>
+                    <h1>{counterPlayer2}</h1>
                 </button> 
     )
 };

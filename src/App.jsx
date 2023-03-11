@@ -1,7 +1,7 @@
 import './styles/index.scss';
 
 import Home from './pages/Home';
-import { useEffect, useState } from 'react';
+import { useEffect, useState, useRef  } from 'react';
 import { nanoid } from 'nanoid';
 
 
@@ -9,40 +9,159 @@ import { nanoid } from 'nanoid';
 
 function App() {
 
-const [discs, setDiscs] = useState(getNewTable());
-const [playerOn, setPlayerOn] = useState(1);
-const [win, setWin] = useState(false)
-console.log('win!!',win);
-console.log(discs);
+  const [discs, setDiscs] = useState(getNewTable());
+  const [playerStartGame, setPlayerStartGame] = useState(1);
+  const [playerOn, setPlayerOn] = useState(1);
+  const [winnerPlayer, setWinnerPlayer] = useState(null);
+  const [winnerDiscs, setWinnerDiscs] = useState([]);
+  const [counterPlayer1, setCounterPlayer1] = useState(0);
+  const [counterPlayer2, setCounterPlayer2] = useState(0);
+  const [columnValue, setColumnValue] = useState(0);
+  const [timePlayer1, setTimePlayer1] = useState(30);
+  const [timePlayer2, setTimePlayer2] = useState(30);
+  const [isRunningPlayer1, setIsRunningPlayer1] = useState(false);
+  const [isRunningPlayer2, setIsRunningPlayer2] = useState(false);
+  const [isWaitingPlayer1, setIsWaitingPlayer1] = useState(true);
+  const [isWaitingPlayer2, setIsWaitingPlayer2] = useState(false);
 
+  const delay = 1000;
 
-useEffect(() => {
+  useInterval(() => {
+    setTimePlayer1(timePlayer1 >=1 ? timePlayer1 - 1 : 0);
+  }, isRunningPlayer1 && isWaitingPlayer1 ? delay : null);
 
-  if (
+  useInterval(() => {
+    setTimePlayer2(timePlayer2 >=1 ? timePlayer2 - 1 : 0);
+  }, isRunningPlayer2 && isWaitingPlayer2 ? delay : null);
+
+  function useInterval(callback, delay) {
+    const savedCallback = useRef();
+
+  useEffect(() => {
+    savedCallback.current = callback;
+  }, [callback]);
+
+  useEffect(() => {
+    function tick() {
+      savedCallback.current();
+    }
+    if (delay !== null) {
+      let id = setInterval(tick, delay);
+      return () => clearInterval(id);
+    }
+  }, [delay]);
+}
+
+  if (winnerPlayer === null) {
+    if (timePlayer2 === 0 && timePlayer1 > 0) {
+      setWinnerPlayer(1);
+      setCounterPlayer1(counterPlayer1 + 1); 
+      stopTimer();
+      } else if (timePlayer1 === 0 && timePlayer2 > 0) {
+        setWinnerPlayer(2);
+        setCounterPlayer2(counterPlayer2 + 1);
+        stopTimer();
+      }
     horizontalCondition() ||
     verticalCondition() ||
-    diagonalCondition()
-  ) {
-    setWin(true)
-    console.log('vvvvin');
+    diagonalCondition();
   }
 
-}, [discs])
+  function showWinner(disc1, disc2, disc3, disc4) {
+    const isWinner = disc1.player;
+    const winnersId = [disc1.id, disc2.id, disc3.id, disc4.id];
+    setWinnerPlayer(isWinner);
+    setWinnerDiscs(winnersId)
+    setIsRunningPlayer1(false);
+    setIsRunningPlayer2(false);
+    isWinner === 1 ? 
+    setCounterPlayer1(counterPlayer1 + 1) :
+    setCounterPlayer2(counterPlayer2 + 1);
+  }
 
+  function playAgain() {
+    setDiscs(getNewTable());
+    setPlayerStartGame(playerStartGame === 1 ? 2 : 1)
+    setPlayerOn(playerStartGame === 1 ? 2 : 1);
+    setWinnerPlayer(null);
+    setColumnValue(0);
+    stopTimer(playerStartGame);
+  }
+  
+  function restartNewTable() {
+    setDiscs(getNewTable());
+    setPlayerStartGame(1);
+    setPlayerOn(1);
+    setWinnerPlayer(null);
+    setColumnValue(0);
+    setCounterPlayer1(0);
+    setCounterPlayer2(0);
+    stopTimer(2);
+  }
 
-function showWin(one, two, three, four) {
-  console.log('showing', one, two, three, four);
-}
+  function startTimer() {
+    setIsRunningPlayer2(true);
+    setIsRunningPlayer1(true);
+    setIsWaitingPlayer1(!isWaitingPlayer1)
+    setIsWaitingPlayer2(!isWaitingPlayer2)
+  }
+  
+  function stopTimer(player) {
+    setIsRunningPlayer2(false);
+    setIsRunningPlayer1(false);
+    setIsWaitingPlayer1(player === 2 ? true : false);
+    setIsWaitingPlayer2(player === 2 ? false : true);
+    setTimePlayer1(30);
+    setTimePlayer2(30);
+  }
 
-function checkDischMatch(one, two, three, four) {
+  function getNewTable() {
+    const newDiscs = [];
+    const column = 7;
+    const row = 6;
+      for (let i = 0; i < row; i++) {
+        for (let j = 0; j < column; j++) {
+          newDiscs.push({
+          columnValue: j + 1,
+          rowValue: i + 1,
+          isFree: true,
+          player: 0,
+          id: nanoid()
+        });
+      }
+    }
+    return newDiscs
+  }
+
+  function selectDisc(id) {
+    if (winnerPlayer === null) {
+      setPlayerOn(playerOn === 1 ? 2 : 1);
+      setDiscs(oldDisc => oldDisc.map(disc => {
+        return disc.id === id ? 
+            {...disc, isFree: !disc.isFree, player: playerOn } :
+            disc
+    }));
+    startTimer()
+      const disc = discs.filter(disc =>disc.id === id)[0];
+      setColumnValue(disc.columnValue)
+    }
+  }
+
+function checkDischMatch(disc1, disc2, disc3, disc4) {
   return (
-    one === two &&
-    one === three &&
-    one === four &&
-    one !== 0 
-    // one !== undefined
+    disc1 === disc2 &&
+    disc1 === disc3 &&
+    disc1 === disc4 &&
+    disc1 !== 0
   );
 }
+
+function returnDiscValues(columnValue, rowValue) {
+  const disc = discs.filter(disc =>
+    disc.columnValue === columnValue && disc.rowValue === rowValue)[0];
+    return disc
+}
+
 function horizontalCondition() {
   for (let row = 1; row < 7; row++) {
     for (let col = 1; col < 5; col++) {
@@ -58,7 +177,7 @@ function horizontalCondition() {
                 disc4.player
                 )
               ){
-          showWin(disc1, disc2, disc3, disc4)
+          showWinner(disc1, disc2, disc3, disc4);
           return true
         }    else {
         continue;
@@ -66,8 +185,6 @@ function horizontalCondition() {
     }
   }
 }
-
-
 
 function verticalCondition() {
   for (let col = 1; col < 8; col++) {
@@ -84,7 +201,7 @@ function verticalCondition() {
                 disc4.player
                 )
               ){
-          showWin(disc1, disc2, disc3, disc4)
+          showWinner(disc1, disc2, disc3, disc4);
           return true
         }    else {
         continue;
@@ -92,14 +209,9 @@ function verticalCondition() {
     }
   }
 }
-function returnDiscValues(columnValue, rowValue) {
-  const disc = discs.filter(disc =>
-    disc.columnValue === columnValue && disc.rowValue === rowValue)[0];
-    return disc
-}
 
 function diagonalCondition() {
-  for (let col = 1; col < 4; col++) {
+  for (let col = 1; col < 5; col++) {
     for (let row = 1; row < 4; row++) {
       const disc1 = returnDiscValues(col, row)
       const disc2 = returnDiscValues(col + 1, row + 1);
@@ -117,8 +229,7 @@ function diagonalCondition() {
           disc4.player
           )
       ) {
-     
-        showWin(disc1, disc2, disc3, disc4)
+        showWinner(disc1, disc2, disc3, disc4);
         return true;
       } else if (
         checkDischMatch(
@@ -128,7 +239,7 @@ function diagonalCondition() {
           disc8.player
           )
       ) {
-        showWin(disc5, disc6, disc7, disc8)
+        showWinner(disc5, disc6, disc7, disc8);
         return true;
       } else {
         continue;
@@ -137,98 +248,25 @@ function diagonalCondition() {
   }
 }
 
-
-function getNewTable() {
-  const newDiscs = [];
-  const column = 7;
-  const row = 6;
-  for (let i = 0; i < row; i++) {
-       for (let j = 0; j < column; j++) {
-        newDiscs.push({
-        columnValue: j + 1,
-        rowValue: i + 1,
-        isFree: true,
-        player: 0,
-        id: nanoid(),
-    });
-}
-
-  }
-  return newDiscs
-}
-
-
-function restartNewTable() {
-  setDiscs(getNewTable());
-  setPlayerOn(playerOn === 1 ? 2 : 1)
-}
-
-function putDiscs(id) {
-  setPlayerOn(playerOn === 1 ? 2 : 1);
-  setDiscs(oldDisc => oldDisc.map(disc => {
-    return disc.id === id ? 
-        {...disc, isFree: !disc.isFree, player: playerOn} :
-        disc
-}));
-}
-
   return (
     <div className="App ">
     
-  <Home  discs={discs} setDiscs={setDiscs} restartNewTable={restartNewTable} putDiscs={putDiscs} />
-
    
-{/* 
-   Main menu start
+  <Home 
+        columnValue={columnValue}
+        counterPlayer1={counterPlayer1}
+        counterPlayer2={counterPlayer2}
+        winnerPlayer={winnerPlayer} 
+        winnerDiscs={winnerDiscs}
+        playAgain={playAgain}
+        playerOn={playerOn}
+        discs={discs}
+        restartNewTable={restartNewTable}
+        selectDisc={selectDisc}
+        timePlayer1={timePlayer1}
+        timePlayer2={timePlayer2}
+    />
 
-   Play vs player
-   Game rules
-
-  Main menu end
-
-  Rules start
-
-  Rules
-
-  Objective
-
-  Be the first player to connect 4 of the same colored discs in a row (either 
-  vertically, horizontally, or diagonally).
-
-  How to play
-
-  Red goes first in the first game.
-  Players must alternate turns, and only one disc can be dropped in each turn. 
-  The game ends when there is a 4-in-a-row or a stalemate.
-  The starter of the previous game goes second on the next game.
-
-  Rules end
-
-  Ingame menu start
-
-  Pause
-
-  Continue game
-  Restart
-  Quit game
-
-  Ingame menu end
-  
-  Game board start
-
-  Menu
-  Restart
-
-  Player 1
-  Player 2
-
-  Player 1's turn
-  Player 2's turn
-
-  Wins
-  Play again
-
-  Game board end */}
     </div>
   );
 }
