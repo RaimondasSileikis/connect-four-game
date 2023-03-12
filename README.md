@@ -32,7 +32,7 @@ Users should be able to:
 ### Links
 
 - Solution URL: [Github](https://github.com/RaimondasSileikis/connect-four-game)
-- Live Site URL: [Connect Four game](https://conect-four-game.netlify.app/play)
+- Live Site URL: [Connect Four game](https://conect-four-game.netlify.app)
 
 ### Built with
 
