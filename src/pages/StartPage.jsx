@@ -6,8 +6,8 @@ export default function StartPage() {
 
     return (
     
-        <div  className='home'>
-             <div className='home-container'>
+        <div className='menu-container'>
+             <div className='menu-box'>
                 <div className='logo'>
                     <img src={logo} alt="logo" />
                 </div>
@@ -15,7 +15,7 @@ export default function StartPage() {
                     <BtnPlayVsPlayer></BtnPlayVsPlayer>
                 </Link>
                 <Link to="/rules">
-                    <button  className='btn-play game-rules'>
+                    <button className='btn-play bg-white'>
                         <h2>games rules</h2>
                     </button>
                 </Link>

@@ -1,12 +1,9 @@
-import { Link } from "react-router-dom";
-
-export default function BtnMenu({restartNewTable}) {
+export default function BtnMenu({pauseOn}) {
     
     return (
-        <Link to="/">
-        <div onClick={restartNewTable} className='btn-menu'>
-                <h4>meniu</h4>
-            </div>
-        </Link>
+        
+        <button onClick={pauseOn} className='btn-menu'>
+            <h4>meniu</h4>
+        </button>
     )
 };

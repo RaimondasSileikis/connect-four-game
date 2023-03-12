@@ -8,15 +8,11 @@
     border: 3px solid hsl( var(--clr-black) );
     box-shadow: 0px 10px 0px hsl( var(--clr-black) );
     border-radius: 1.25rem;
-    
+    height: 4.5rem;
+    cursor: pointer;
 }
 .btn-play:hover {
     box-shadow: 0px 10px 0px hsl( var(--clr-blue-dark) );
-}
-
-.game-rules {
-    height: 4.5rem;
-    cursor: pointer;
 }
 
 .btn-menu {
@@ -76,10 +72,9 @@
         place-self: center;
         z-index:70;
     }
-   
-        :not(first-child) {
-            z-index: 60;
-        }
+    :not(first-child) {
+        z-index: 60;
+    }
 
 }
 .turn-player1 {

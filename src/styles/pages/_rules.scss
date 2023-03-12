@@ -1,0 +1,32 @@
+.rules-container {
+    flex-direction: column;
+    width: 30rem;
+    gap:2rem;
+    padding: 2rem;
+    position: relative;
+    background-color: hsl( var(--clr-white) );
+}
+
+.rules-container  h3 {
+    color: hsl( var(--clr-blue-light) );
+}
+.rules-container  p {
+    padding: 0.4rem 0;
+    text-transform: none;
+}
+
+.rules-container img {
+    position: absolute;
+    bottom: 0;
+    transform: translateY(50%);
+}
+.rules-container span {
+    font-weight: 700;
+    margin-right: 1em;
+    padding: 0.4rem 0;
+}
+.rules-container li {
+    list-style-type: none;
+    display: flex;
+    align-items: flex-start;
+}

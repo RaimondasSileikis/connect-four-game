@@ -4,8 +4,8 @@ import { Link } from 'react-router-dom';
 export default function RulesPage() {
 
     return (
-        <div className='home'>
-            <div  className=' btn-play rules-container'>
+        <div className='menu-container'>
+            <div  className='player-box rules-container'>
                 <h1>Rules</h1>
                     <div>
                         <h3>OBJECTIVE</h3>

@@ -3,8 +3,10 @@
 @import '/src/styles/base/variables.scss';
 
 @import '/src/styles/components/buttons';
+@import '/src/styles/components/counterbox';
 @import '/src/styles/components/dashboard';
 @import '/src/styles/components/turnPlayer';
 
 @import '/src/styles/pages/home';
-@import '/src/styles/pages/main';
+@import '/src/styles/pages/menu';
+@import '/src/styles/pages/rules';

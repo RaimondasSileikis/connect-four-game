@@ -2,7 +2,7 @@ import { BrowserRouter, Route, Routes } from 'react-router-dom';
 import { useEffect, useState, useRef} from 'react';
 import { nanoid } from 'nanoid';
 import './styles/index.scss';
-import Main from './pages/Main';
+import Home from './pages/Home';
 import StartPage from './pages/StartPage';
 import RulesPage from './pages/RulesPage';
 
@@ -22,6 +22,7 @@ function App() {
   const [isRunningPlayer2, setIsRunningPlayer2] = useState(false);
   const [isWaitingPlayer1, setIsWaitingPlayer1] = useState(true);
   const [isWaitingPlayer2, setIsWaitingPlayer2] = useState(false);
+  const [modal, setModal] = useState(false);
 
   const delay = 1000;
 
@@ -96,6 +97,7 @@ function App() {
     setCounterPlayer1(0);
     setCounterPlayer2(0);
     stopTimer(2);
+    setModal(false);
   }
 
   function startTimer() {
@@ -247,29 +249,49 @@ function diagonalCondition() {
   }
 }
 
+function pauseOn() {
+  setModal(!modal)
+  setIsWaitingPlayer1(false) 
+  setIsWaitingPlayer2(false);
+}
+
+function pauseOf() {
+  setModal(!modal)
+  if (playerOn === 1) {
+    setIsWaitingPlayer1( true)
+    setIsWaitingPlayer2(false)
+  } else {
+    setIsWaitingPlayer1(false)
+    setIsWaitingPlayer2(true)
+  }
+}
+
   return (
     <div className="App ">
       <BrowserRouter>
         <Routes>
 
-        <Route path="/"  element={<StartPage/>}/>
-        <Route path="/rules"  element={<RulesPage/>}/>
-        <Route path="/play" element={
-          <Main
-            columnValue={columnValue}
-            counterPlayer1={counterPlayer1}
-            counterPlayer2={counterPlayer2}
-            winnerPlayer={winnerPlayer} 
-            winnerDiscs={winnerDiscs}
-            playAgain={playAgain}
-            playerOn={playerOn}
-            discs={discs}
-            restartNewTable={restartNewTable}
-            selectDisc={selectDisc}
-            timePlayer1={timePlayer1}
-            timePlayer2={timePlayer2}/>
-        }/>
-
+          <Route path="/"  element={<StartPage/>}/>
+          <Route path="/rules"  element={<RulesPage/>}/>
+          <Route path="/play" element={
+            <Home
+              columnValue={columnValue}
+              counterPlayer1={counterPlayer1}
+              counterPlayer2={counterPlayer2}
+              winnerPlayer={winnerPlayer} 
+              winnerDiscs={winnerDiscs}
+              playAgain={playAgain}
+              playerOn={playerOn}
+              discs={discs}
+              restartNewTable={restartNewTable}
+              selectDisc={selectDisc}
+              timePlayer1={timePlayer1}
+              timePlayer2={timePlayer2}
+              modal={modal} 
+              pauseOn={pauseOn} 
+              pauseOf={pauseOf}
+              />
+            }/>
         </Routes>
       </BrowserRouter>
     </div>

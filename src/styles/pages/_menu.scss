@@ -1,0 +1,33 @@
+.menu-container {
+    display: grid;
+    position: absolute;
+    align-content: center;
+    justify-content: center;
+    z-index: 100;
+    min-height: 100vh;
+    min-width: 100vw;
+    margin: 0;
+    background-color: hsl( var(--clr-blue-dark) );
+}
+
+.logo img {
+    padding: 1rem 0;
+}
+.menu-box {
+    display: grid;
+    gap: 1.5rem;
+    justify-items: center;
+    align-items: center;
+    padding: 3rem;
+    border-radius: 2.5rem;
+    background-color: hsl( var(--clr-blue-light) );
+    border: 3px solid hsl( var(--clr-black) );
+}
+
+.menu-ingame{
+    background-color: hsl( var(--clr-black) / 0.5 );
+    visibility:visible;
+    button {
+        justify-content: center;
+    }
+}
