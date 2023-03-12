@@ -56,7 +56,7 @@
     .turn {
        padding: 0.5rem 0;
     }
-    .counter-box-1 {
+    .counter-box-one {
         grid-area: counter1;
         justify-self: flex-start;
         margin-left: 2rem;
@@ -65,7 +65,7 @@
             transform: translate(-50%, 50%);
          }
     }
-    .counter-box-2 {
+    .counter-box-two {
         grid-area: counter2;
         justify-self:flex-end;
         margin-right: 2rem;
@@ -74,8 +74,8 @@
              transform: translate(50%, 50%);
          }
     }
-    .counter-box-1,
-    .counter-box-2 {
+    .counter-box-one,
+    .counter-box-two {
         display: flex;
         align-items: stretch;
         flex-direction: row;
@@ -90,7 +90,7 @@
         }
         
     }
-    .counter-box-2 {
+    .counter-box-two {
         .player-box--content{
             flex-direction: row-reverse;
         }

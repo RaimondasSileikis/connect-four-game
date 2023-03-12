@@ -13,26 +13,28 @@ function App() {
   const [playerOn, setPlayerOn] = useState(1);
   const [winnerPlayer, setWinnerPlayer] = useState(null);
   const [winnerDiscs, setWinnerDiscs] = useState([]);
-  const [counterPlayer1, setCounterPlayer1] = useState(0);
-  const [counterPlayer2, setCounterPlayer2] = useState(0);
+  const [counterPlayerOne, setCounterPlayerOne] = useState(0);
+  const [counterPlayerTwo, setCounterPlayerTwo] = useState(0);
   const [columnValue, setColumnValue] = useState(0);
-  const [timePlayer1, setTimePlayer1] = useState(30);
-  const [timePlayer2, setTimePlayer2] = useState(30);
-  const [isRunningPlayer1, setIsRunningPlayer1] = useState(false);
-  const [isRunningPlayer2, setIsRunningPlayer2] = useState(false);
-  const [isWaitingPlayer1, setIsWaitingPlayer1] = useState(true);
-  const [isWaitingPlayer2, setIsWaitingPlayer2] = useState(false);
+  const [timePlayerOne, setTimePlayerOne] = useState(30);
+  const [timePlayerTwo, setTimePlayerTwo] = useState(30);
+  const [isRunningPlayerOne, setIsRunningPlayerOne] = useState(false);
+  const [isRunningPlayerTwo, setIsRunningPlayerTwo] = useState(false);
+  const [isWaitingPlayerOne, setIsWaitingPlayerOne] = useState(true);
+  const [isWaitingPlayerTwo, setIsWaitingPlayerTwo] = useState(false);
   const [modal, setModal] = useState(false);
+  const [cpuOn, setCpuOn] = useState(false);
+  const [cpuMode, setCpuMode] = useState(false);
 
   const delay = 1000;
 
   useInterval(() => {
-    setTimePlayer1(timePlayer1 >=1 ? timePlayer1 - 1 : 0);
-  }, isRunningPlayer1 && isWaitingPlayer1 ? delay : null);
+    setTimePlayerOne(timePlayerOne >=1 ? timePlayerOne - 1 : 0);
+  }, isRunningPlayerOne && isWaitingPlayerOne ? delay : null);
 
   useInterval(() => {
-    setTimePlayer2(timePlayer2 >=1 ? timePlayer2 - 1 : 0);
-  }, isRunningPlayer2 && isWaitingPlayer2 ? delay : null);
+    setTimePlayerTwo(timePlayerTwo >=1 ? timePlayerTwo - 1 : 0);
+  }, isRunningPlayerTwo && isWaitingPlayerTwo ? delay : null);
 
   function useInterval(callback, delay) {
     const savedCallback = useRef();
@@ -52,32 +54,38 @@ function App() {
   }, [delay]);
 }
 
+  if (cpuOn === true) {
+    setTimeout(() => {
+    cpuTurn() 
+  }, rand(100, 300));
+};
+
   if (winnerPlayer === null) {
-    if (timePlayer2 === 0 && timePlayer1 > 0) {
+    if (timePlayerTwo === 0 && timePlayerOne > 0) {
       setWinnerPlayer(1);
-      setCounterPlayer1(counterPlayer1 + 1); 
+      setCounterPlayerOne(counterPlayerOne + 1); 
       stopTimer();
-      } else if (timePlayer1 === 0 && timePlayer2 > 0) {
+      } else if (timePlayerOne === 0 && timePlayerTwo > 0) {
         setWinnerPlayer(2);
-        setCounterPlayer2(counterPlayer2 + 1);
+        setCounterPlayerTwo(counterPlayerTwo + 1);
         stopTimer();
       }
     horizontalCondition() ||
     verticalCondition() ||
     diagonalCondition();
-  }
+  };
 
-  function showWinner(disc1, disc2, disc3, disc4) {
-    const isWinner = disc1.player;
-    const winnersId = [disc1.id, disc2.id, disc3.id, disc4.id];
+  function showWinner(discOne, discTwo, discThree, discFour) {
+    const isWinner = discOne.player;
+    const winnersId = [discOne.id, discTwo.id, discThree.id, discFour.id];
     setWinnerPlayer(isWinner);
     setWinnerDiscs(winnersId)
-    setIsRunningPlayer1(false);
-    setIsRunningPlayer2(false);
+    setIsRunningPlayerOne(false);
+    setIsRunningPlayerTwo(false);
     isWinner === 1 ? 
-    setCounterPlayer1(counterPlayer1 + 1) :
-    setCounterPlayer2(counterPlayer2 + 1);
-  }
+    setCounterPlayerOne(counterPlayerOne + 1) :
+    setCounterPlayerTwo(counterPlayerTwo + 1);
+  };
 
   function playAgain() {
     setDiscs(getNewTable());
@@ -86,7 +94,10 @@ function App() {
     setWinnerPlayer(null);
     setColumnValue(0);
     stopTimer(playerStartGame);
-  }
+    if (cpuMode) {
+      setCpuOn(playerStartGame === 1 ? !cpuOn : cpuOn);
+    };
+  };
   
   function restartNewTable() {
     setDiscs(getNewTable());
@@ -94,27 +105,28 @@ function App() {
     setPlayerOn(1);
     setWinnerPlayer(null);
     setColumnValue(0);
-    setCounterPlayer1(0);
-    setCounterPlayer2(0);
+    setCounterPlayerOne(0);
+    setCounterPlayerTwo(0);
     stopTimer(2);
     setModal(false);
+    setCpuOn(false);
   }
 
   function startTimer() {
-    setIsRunningPlayer2(true);
-    setIsRunningPlayer1(true);
-    setIsWaitingPlayer1(!isWaitingPlayer1)
-    setIsWaitingPlayer2(!isWaitingPlayer2)
+    setIsRunningPlayerTwo(true);
+    setIsRunningPlayerOne(true);
+    setIsWaitingPlayerOne(!isWaitingPlayerOne);
+    setIsWaitingPlayerTwo(!isWaitingPlayerTwo);
   }
   
   function stopTimer(player) {
-    setIsRunningPlayer2(false);
-    setIsRunningPlayer1(false);
-    setIsWaitingPlayer1(player === 2 ? true : false);
-    setIsWaitingPlayer2(player === 2 ? false : true);
-    setTimePlayer1(30);
-    setTimePlayer2(30);
-  }
+    setIsRunningPlayerTwo(false);
+    setIsRunningPlayerOne(false);
+    setIsWaitingPlayerOne(player === 2 ? true : false);
+    setIsWaitingPlayerTwo(player === 2 ? false : true);
+    setTimePlayerOne(30);
+    setTimePlayerTwo(30);
+  };
 
   function getNewTable() {
     const newDiscs = [];
@@ -131,31 +143,57 @@ function App() {
         });
       }
     }
-    return newDiscs
+    return newDiscs;
   }
 
-  function selectDisc(id) {
+  function rand(min, max) {
+    min = Math.ceil(min);
+    max = Math.floor(max);
+    return Math.floor(Math.random() * (max - min + 1) + min);
+  };
+
+  function getRandomDisc() {
+    const isFree = discs.filter(disc => disc.player === 0);
+    const cpuChoice = isFree[rand(0, isFree.length - 1)].id;
+      return cpuChoice;
+  };
+
+  function cpuTurn() {
+    const playerOnCpu = playerOn;
+    selectDisc(getRandomDisc() , playerOnCpu);
+    setCpuOn(false);
+  };
+
+  function playerTurn(id) {
+    const playerOnMe = playerOn;
+    if (cpuOn === false) {
+      selectDisc(id, playerOnMe);
+    };
+ };
+
+  function selectDisc(discId, player) {
     if (winnerPlayer === null) {
-      setPlayerOn(playerOn === 1 ? 2 : 1);
+      setPlayerOn(player === 1 ? 2 : 1);
       setDiscs(oldDisc => oldDisc.map(disc => {
-        return disc.id === id ? 
-            {...disc, isFree: !disc.isFree, player: playerOn } :
+        return disc.id === discId ? 
+            {...disc, isFree: !disc.isFree, player: player } :
             disc
     }));
     startTimer()
-      const disc = discs.filter(disc =>disc.id === id)[0];
-      setColumnValue(disc.columnValue)
-    }
-  }
+    cpuMode === true ? setCpuOn(true) : setCpuOn(false);
+    const disc = discs.filter(disc =>disc.id === discId)[0];
+    setColumnValue(disc.columnValue);
+    };
+  };
 
-function checkDischMatch(disc1, disc2, disc3, disc4) {
+function checkDischMatch(discOne, discTwo, discThree, discFour) {
   return (
-    disc1 === disc2 &&
-    disc1 === disc3 &&
-    disc1 === disc4 &&
-    disc1 !== 0
+    discOne === discTwo &&
+    discOne === discThree &&
+    discOne === discFour &&
+    discOne !== 0
   );
-}
+};
 
 function returnDiscValues(columnValue, rowValue) {
   const disc = discs.filter(disc =>
@@ -166,19 +204,19 @@ function returnDiscValues(columnValue, rowValue) {
 function horizontalCondition() {
   for (let row = 1; row < 7; row++) {
     for (let col = 1; col < 5; col++) {
-      const disc1 = returnDiscValues(col, row);
-      const disc2 = returnDiscValues(col + 1, row);
-      const disc3 = returnDiscValues(col + 2, row);
-      const disc4 = returnDiscValues(col + 3, row);
+      const discOne = returnDiscValues(col, row);
+      const discTwo = returnDiscValues(col + 1, row);
+      const discThree = returnDiscValues(col + 2, row);
+      const discFour = returnDiscValues(col + 3, row);
           if (
               checkDischMatch(
-                disc1.player,
-                disc2.player,
-                disc3.player,
-                disc4.player
+                discOne.player,
+                discTwo.player,
+                discThree.player,
+                discFour.player
                 )
               ){
-          showWinner(disc1, disc2, disc3, disc4);
+          showWinner(discOne, discTwo, discThree, discFour);
           return true
         }    else {
         continue;
@@ -190,19 +228,19 @@ function horizontalCondition() {
 function verticalCondition() {
   for (let col = 1; col < 8; col++) {
     for (let row = 1; row < 4; row++) {
-      const disc1 = returnDiscValues(col, row);
-      const disc2 = returnDiscValues(col, row + 1);
-      const disc3 = returnDiscValues(col, row + 2);
-      const disc4 = returnDiscValues(col, row + 3);
+      const discOne = returnDiscValues(col, row);
+      const discTwo = returnDiscValues(col, row + 1);
+      const discThree = returnDiscValues(col, row + 2);
+      const discFour = returnDiscValues(col, row + 3);
           if (
               checkDischMatch(
-                disc1.player,
-                disc2.player,
-                disc3.player,
-                disc4.player
+                discOne.player,
+                discTwo.player,
+                discThree.player,
+                discFour.player
                 )
               ){
-          showWinner(disc1, disc2, disc3, disc4);
+          showWinner(discOne, discTwo, discThree, discFour);
           return true
         }    else {
         continue;
@@ -214,33 +252,33 @@ function verticalCondition() {
 function diagonalCondition() {
   for (let col = 1; col < 5; col++) {
     for (let row = 1; row < 4; row++) {
-      const disc1 = returnDiscValues(col, row)
-      const disc2 = returnDiscValues(col + 1, row + 1);
-      const disc3 = returnDiscValues(col + 2, row + 2);
-      const disc4 = returnDiscValues(col + 3, row + 3);
-      const disc5 = returnDiscValues(col + 3, row);
-      const disc6 = returnDiscValues(col + 2, row + 1);
-      const disc7 = returnDiscValues(col + 1, row + 2);
-      const disc8 = returnDiscValues(col, row + 3);
+      const discOne = returnDiscValues(col, row)
+      const discTwo = returnDiscValues(col + 1, row + 1);
+      const discThree = returnDiscValues(col + 2, row + 2);
+      const discFour = returnDiscValues(col + 3, row + 3);
+      const discFive = returnDiscValues(col + 3, row);
+      const discSix = returnDiscValues(col + 2, row + 1);
+      const discSeven = returnDiscValues(col + 1, row + 2);
+      const discEight = returnDiscValues(col, row + 3);
       if (
         checkDischMatch(
-          disc1.player,
-          disc2.player,
-          disc3.player,
-          disc4.player
+          discOne.player,
+          discTwo.player,
+          discThree.player,
+          discFour.player
           )
       ) {
-        showWinner(disc1, disc2, disc3, disc4);
+        showWinner(discOne, discTwo, discThree, discFour);
         return true;
       } else if (
         checkDischMatch(
-          disc5.player,
-          disc6.player,
-          disc7.player,
-          disc8.player
+          discFive.player,
+          discSix.player,
+          discSeven.player,
+          discEight.player
           )
       ) {
-        showWinner(disc5, disc6, disc7, disc8);
+        showWinner(discFive, discSix, discSeven, discEight);
         return true;
       } else {
         continue;
@@ -251,45 +289,61 @@ function diagonalCondition() {
 
 function pauseOn() {
   setModal(!modal)
-  setIsWaitingPlayer1(false) 
-  setIsWaitingPlayer2(false);
+  setIsWaitingPlayerOne(false) 
+  setIsWaitingPlayerTwo(false);
 }
 
 function pauseOf() {
   setModal(!modal)
   if (playerOn === 1) {
-    setIsWaitingPlayer1( true)
-    setIsWaitingPlayer2(false)
+    setIsWaitingPlayerOne( true)
+    setIsWaitingPlayerTwo(false)
   } else {
-    setIsWaitingPlayer1(false)
-    setIsWaitingPlayer2(true)
+    setIsWaitingPlayerOne(false)
+    setIsWaitingPlayerTwo(true)
   }
 }
+function playVsCpu() {
+  setCpuMode(true)
+}
+  function playVsPlayer() {
+        setCpuMode(false)
+      }
 
   return (
     <div className="App ">
       <BrowserRouter>
         <Routes>
-
-          <Route path="/"  element={<StartPage/>}/>
-          <Route path="/rules"  element={<RulesPage/>}/>
+          <Route path="/"  element={
+            <StartPage 
+              setcpuMode={setCpuMode}
+              playVsCpu={playVsCpu} 
+              playVsPlayer={playVsPlayer}
+              />}
+            />
+          <Route path="/rules"  element={
+            <RulesPage
+            />}
+          />
           <Route path="/play" element={
             <Home
               columnValue={columnValue}
-              counterPlayer1={counterPlayer1}
-              counterPlayer2={counterPlayer2}
+              counterPlayerOne={counterPlayerOne}
+              counterPlayerTwo={counterPlayerTwo}
               winnerPlayer={winnerPlayer} 
               winnerDiscs={winnerDiscs}
               playAgain={playAgain}
               playerOn={playerOn}
               discs={discs}
               restartNewTable={restartNewTable}
-              selectDisc={selectDisc}
-              timePlayer1={timePlayer1}
-              timePlayer2={timePlayer2}
+              playerTurn={playerTurn}
+              timePlayerOne={timePlayerOne}
+              timePlayerTwo={timePlayerTwo}
               modal={modal} 
               pauseOn={pauseOn} 
               pauseOf={pauseOf}
+              cpuOn={cpuOn}
+              cpuMode={cpuMode}
               />
             }/>
         </Routes>

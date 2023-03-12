@@ -6,14 +6,14 @@ export default function TurnPlayer({
     playAgain, 
     winnerPlayer, 
     playerOn, 
-    timePlayer1, 
-    timePlayer2}) {
+    timePlayerOne, 
+    timePlayerTwo}) {
     
-    const turnPlayer1 = 'turn-player1';
-    const turnPlayer2 = 'turn-player2';
-    const winsPlayer1 = 'wins-player1';
-    const winsPlayer2 = 'wins-player2';
-    const winsPlayer = [winsPlayer1, winsPlayer2];
+    const turnPlayerOne = 'turn-player-one';
+    const turnPlayerTwo = 'turn-player-two';
+    const winsPlayerOne = 'wins-player-one';
+    const winsPlayerTwo = 'wins-player-two';
+    const winsPlayer = [winsPlayerOne, winsPlayerTwo];
   
     const imageTurn = turn_background_red;
     const imageWin = turn_background_yellow;
@@ -22,12 +22,12 @@ export default function TurnPlayer({
 
         <div className={
             `turn 
-            ${playerOn === 1 ? turnPlayer1 : turnPlayer2}
+            ${playerOn === 1 ? turnPlayerOne : turnPlayerTwo}
             ${winnerPlayer ? winsPlayer[winnerPlayer - 1] : null}
             `}>
             <div hidden={winnerPlayer ?  true : false}  className='turn-time'>
                 <h4>{`player ${playerOn}'s turn`}</h4>
-                <h1>{playerOn === 1 ? timePlayer1 : timePlayer2}</h1> 
+                <h1>{playerOn === 1 ? timePlayerOne : timePlayerTwo}</h1> 
             </div>
             <img 
                 hidden={winnerPlayer ?  true : false}  

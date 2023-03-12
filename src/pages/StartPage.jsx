@@ -1,8 +1,9 @@
 import logo from '../assets/images/logo.svg';
 import { Link } from 'react-router-dom';
 import BtnPlayVsPlayer from '../components/BtnPlayVsPlayer';
+import BtnPlayVsCpu from '../components/BtnPlayVsCpu';
 
-export default function StartPage() {
+export default function StartPage({playVsCpu, playVsPlayer}) {
 
     return (
     
@@ -12,7 +13,10 @@ export default function StartPage() {
                     <img src={logo} alt="logo" />
                 </div>
                 <Link to="/play">
-                    <BtnPlayVsPlayer></BtnPlayVsPlayer>
+                    <BtnPlayVsCpu playVsCpu={playVsCpu}></BtnPlayVsCpu>
+                </Link>
+                <Link to="/play">
+                    <BtnPlayVsPlayer playVsPlayer={playVsPlayer}></BtnPlayVsPlayer>
                 </Link>
                 <Link to="/rules">
                     <button className='btn-play bg-white'>

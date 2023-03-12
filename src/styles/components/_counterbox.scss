@@ -1,7 +1,7 @@
 .player-box {
     display: flex;
     align-items: center;
-    width: max-content;
+    min-width: 9rem;
     text-transform: uppercase;
     background-color: hsl( var(--clr-white) );
     border: 3px solid hsl( var(--clr-black) );
@@ -9,8 +9,8 @@
     border-radius: 1.25rem;
     align-items: center;
 }
-.counter-box-1,
-.counter-box-2 {
+.counter-box-one,
+.counter-box-two {
     flex-direction: column;
     width: max-content;
     position: relative;

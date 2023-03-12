@@ -7,9 +7,10 @@ import Discs from './Discs';
 export default function Dashboard({
     winnerDiscs, 
     discs, 
-    selectDisc,  
+    playerTurn,  
     playerOn, 
-    columnValue}) {
+    columnValue, 
+    cpuOn}) {
 
     const markerRed = `url(${marker_red })`;
     const markerYellow = `url(${marker_yellow })`;
@@ -24,8 +25,8 @@ export default function Dashboard({
     return (
     
         <div  className='dashboard flex'>
-                <img className='d1' src={board_layer_black_large} alt="Dashboard" />
-                <img className='d2' src={board_layer_white_large} alt="Dashboard" />
+                <img className='board-black' src={board_layer_black_large} alt="Dashboard" />
+                <img className='board-white' src={board_layer_white_large} alt="Dashboard" />
     
                 <div className='discs'>
                     <div  className='cursor'>
@@ -45,7 +46,8 @@ export default function Dashboard({
                             isFree={disc.isFree} 
                             id={disc.id} 
                             winnerDiscs={winnerDiscs} 
-                            selectDisc={() => selectDisc(disc.id)}  
+                            selectDisc={() => playerTurn(disc.id)}
+                            cpuOn={cpuOn}
                         />
                     )}
                 </div> 

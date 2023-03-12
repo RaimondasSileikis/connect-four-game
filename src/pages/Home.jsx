@@ -1,8 +1,8 @@
 import logo from '../assets/images/logo.svg';
 import BtnMenu from '../components/BtnMenu';
 import Dashboard from '../components/Dashboard';
-import CounterBox1 from '../components/CounterBox1';
-import CounterBox2 from '../components/CounterBox2';
+import CounterBoxOne from '../components/CounterBoxOne';
+import CounterBoxTwo from '../components/CounterBoxTwo';
 import BtnRestart from '../components/BtnRestart';
 import TurnPlayer from '../components/TurnPlayer';
 import PausePage from './PausePage';
@@ -13,16 +13,18 @@ export default function Home({
     winnerDiscs,
     playAgain,
     restartNewTable,
-    selectDisc,
+    playerTurn,
     playerOn,
     columnValue,
-    timePlayer1,
-    timePlayer2,
-    counterPlayer1,
-    counterPlayer2,
+    timePlayerOne,
+    timePlayerTwo,
+    counterPlayerOne,
+    counterPlayerTwo,
     modal,
     pauseOn,
-    pauseOf
+    pauseOf,
+    cpuOn,
+    cpuMode
     }) {
     
     return (
@@ -32,7 +34,6 @@ export default function Home({
                 pauseOf={pauseOf}
                 restartNewTable={restartNewTable}
             />
-
             <div className='main'>
                 <header className='header flex'>
                     <BtnMenu pauseOn={pauseOn} />
@@ -43,23 +44,30 @@ export default function Home({
                 </header>
 
                 <main className='container'>
-                    <CounterBox1 counterPlayer1={counterPlayer1}/>
+                    <CounterBoxOne 
+                        counterPlayerOne={counterPlayerOne}
+                        cpuMode={cpuMode}
+                    />
                     <Dashboard
                         discs={discs}
-                        selectDisc={selectDisc}
+                        playerTurn={playerTurn}
                         winnerDiscs={winnerDiscs}
                         playerOn={ playerOn} 
-                        columnValue={columnValue} 
+                        columnValue={columnValue}
+                        cpuOn={cpuOn}
                     />
-                    <CounterBox2 counterPlayer2={counterPlayer2}/>
+                    <CounterBoxTwo 
+                        counterPlayerTwo={counterPlayerTwo}
+                        cpuMode={cpuMode}
+                    />
                 </main>
 
                 <TurnPlayer 
                     playAgain={playAgain} 
                     winnerPlayer={winnerPlayer} 
                     playerOn={playerOn} 
-                    timePlayer1={timePlayer1} 
-                    timePlayer2={timePlayer2}
+                    timePlayerOne={timePlayerOne} 
+                    timePlayerTwo={timePlayerTwo}
                 />
             </div>
         </>

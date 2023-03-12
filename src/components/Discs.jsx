@@ -1,7 +1,7 @@
 import counter_red_large from '../assets/images/counter-red-large.svg';
 import counter_yellow_large from '../assets/images/counter-yellow-large.svg';
 
-export default function Discs({player,isFree, id, winnerDiscs, selectDisc}) {
+export default function Discs({player,isFree, id, winnerDiscs, selectDisc, cpuOn}) {
 
     function styleWinnerDisc( i) {
         const visibility = { visibility: id === winnerDiscs[i]
@@ -9,10 +9,11 @@ export default function Discs({player,isFree, id, winnerDiscs, selectDisc}) {
             return visibility
     }
 
-    const player1 = `url(${counter_red_large})`;
-    const player2 = `url(${counter_yellow_large})`;
-    const players = [player1, player2];
+    const playerOne = `url(${counter_red_large})`;
+    const playerTwo = `url(${counter_yellow_large})`;
+    const players = [playerOne, playerTwo];
 
+  
     const styleDisc = { 
         backgroundImage: !isFree === true ? players[player - 1]: "none",
         zIndex: isFree ? "30" : "20",

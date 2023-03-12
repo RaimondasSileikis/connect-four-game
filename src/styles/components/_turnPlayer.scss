@@ -21,19 +21,19 @@
         }
 
 }
-.turn-player1 {
+.turn-player-one {
     color: hsl( var(--clr-white) );
 }
 
-.turn-player2 {
+.turn-player-two {
     color: hsl( var(--clr-black) );
     
 }
-.wins-player1 {
+.wins-player-one {
     color: hsl( var(--clr-black) );
     background-color: hsl( var(--clr-red) );
 }
-.wins-player2 {
+.wins-player-two {
     background-color: hsl( var(--clr-yellow) );
 }
 
