@@ -46,7 +46,7 @@ export default function Dashboard({
                             isFree={disc.isFree} 
                             id={disc.id} 
                             winnerDiscs={winnerDiscs} 
-                            selectDisc={() => playerTurn(disc.id)}
+                            selectDisc={() => playerTurn(disc.columnValue)}
                             cpuOn={cpuOn}
                         />
                     )}
