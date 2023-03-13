@@ -321,8 +321,6 @@ function verticalCondition() {
         setCpuMode(false)
   };
 
-
-
   function handleMouseOver(column){
     setIsHovering(true);
     setColumnValue(column)
