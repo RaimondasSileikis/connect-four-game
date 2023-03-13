@@ -57,11 +57,14 @@ function App() {
 
   useEffect(() => {
       if (cpuOn === true) {
-        setTimeout(() => {
+       const id = setTimeout(() => {
         cpuTurn() 
       }, rand(500, 1000));
+      return () => {
+        clearInterval(id)
+      }
     };
-  });
+  }, [cpuOn]);
 
   if (winnerPlayer === null) {
     if (timePlayerTwo === 0 && timePlayerOne > 0) {
@@ -161,7 +164,7 @@ function App() {
       return cpuColumnValue;
   };
 
-  function cpuTurn() {
+  const cpuTurn = () => {
     const playerOnCpu = playerOn;
     selectDisc(getRandomDisc() , playerOnCpu);
     setCpuOn(false);
@@ -173,7 +176,7 @@ function App() {
       selectDisc(column, playerOnMe);
       cpuMode ? setCpuOn(true) : setCpuOn(false);
     };
- };
+  };
 
   function findDisc(column) {
     const columArr = discs.filter(disc => 
@@ -192,6 +195,7 @@ function App() {
     }));
     startTimer()
     setColumnValue(column);
+    cpuMode ? setCpuOn(true) : setCpuOn(false);
     };
   };
 
