@@ -25,7 +25,7 @@ function App() {
   const [modal, setModal] = useState(false);
   const [cpuOn, setCpuOn] = useState(false);
   const [cpuMode, setCpuMode] = useState(false);
-
+ 
   const delay = 1000;
 
   useInterval(() => {
@@ -46,19 +46,21 @@ function App() {
   useEffect(() => {
     function tick() {
       savedCallback.current();
-    }
+    };
     if (delay !== null) {
       let id = setInterval(tick, delay);
       return () => clearInterval(id);
-    }
+    };
   }, [delay]);
-}
-
-  if (cpuOn === true) {
-    setTimeout(() => {
-    cpuTurn() 
-  }, rand(200, 400));
 };
+
+  useEffect(() => {
+      if (cpuOn === true) {
+        setTimeout(() => {
+        cpuTurn() 
+      }, rand(500, 1000));
+    };
+  });
 
   if (winnerPlayer === null) {
     if (timePlayerTwo === 0 && timePlayerOne > 0) {
@@ -69,7 +71,7 @@ function App() {
         setWinnerPlayer(2);
         setCounterPlayerTwo(counterPlayerTwo + 1);
         stopTimer();
-      }
+      };
     horizontalCondition() ||
     verticalCondition() ||
     diagonalCondition();
@@ -98,7 +100,7 @@ function App() {
       setCpuOn(playerStartGame === 1 ? !cpuOn : cpuOn);
     };
   };
-  
+
   function restartNewTable() {
     setDiscs(getNewTable());
     setPlayerStartGame(1);
@@ -110,14 +112,14 @@ function App() {
     stopTimer(2);
     setModal(false);
     setCpuOn(false);
-  }
+  };
 
   function startTimer() {
     setIsRunningPlayerTwo(true);
     setIsRunningPlayerOne(true);
     setIsWaitingPlayerOne(!isWaitingPlayerOne);
     setIsWaitingPlayerTwo(!isWaitingPlayerTwo);
-  }
+  };
   
   function stopTimer(player) {
     setIsRunningPlayerTwo(false);
@@ -141,10 +143,10 @@ function App() {
           player: 0,
           id: nanoid()
         });
-      }
-    }
+      };
+    };
     return newDiscs;
-  }
+  };
 
   function rand(min, max) {
     min = Math.ceil(min);
@@ -166,28 +168,28 @@ function App() {
 
   function playerTurn(column) {
     const playerOnMe = playerOn;
-    if (cpuOn === false) {
+    if (!cpuOn) {
       selectDisc(column, playerOnMe);
+      cpuMode ? setCpuOn(true) : setCpuOn(false);
     };
  };
 
-function findDisc(column) {
-  const columArr = discs.filter(disc => 
-     disc.columnValue === column && disc.player === 0
-  );
-  return columArr[columArr.length - 1].id
-}
+  function findDisc(column) {
+    const columArr = discs.filter(disc => 
+      disc.columnValue === column && disc.player === 0
+    );
+    return columArr[columArr.length - 1].id
+  };
 
   function selectDisc(column, player) {
     if (winnerPlayer === null) {
       setPlayerOn(player === 1 ? 2 : 1);
       setDiscs(oldDisc => oldDisc.map(disc => {
         return disc.id === findDisc(column) ? 
-            {...disc, isFree: !disc.isFree, player: player } :
+            {...disc, isFree: !disc.isFree, player: player} :
             disc
     }));
     startTimer()
-    cpuMode === true ? setCpuOn(true) : setCpuOn(false);
     setColumnValue(column);
     };
   };
@@ -204,8 +206,8 @@ function checkDischMatch(discOne, discTwo, discThree, discFour) {
 function returnDiscValues(columnValue, rowValue) {
   const disc = discs.filter(disc =>
     disc.columnValue === columnValue && disc.rowValue === rowValue)[0];
-    return disc
-}
+    return disc;
+};
 
 function horizontalCondition() {
   for (let row = 1; row < 7; row++) {
@@ -226,10 +228,10 @@ function horizontalCondition() {
           return true
         }    else {
         continue;
-      }
-    }
-  }
-}
+      };
+    };
+  };
+};
 
 function verticalCondition() {
   for (let col = 1; col < 8; col++) {
@@ -250,10 +252,10 @@ function verticalCondition() {
           return true
         }    else {
         continue;
-      }
-    }
-  }
-}
+      };
+    };
+  };
+};
 
 function diagonalCondition() {
   for (let col = 1; col < 5; col++) {
@@ -288,33 +290,33 @@ function diagonalCondition() {
         return true;
       } else {
         continue;
-      }
-    }
-  }
-}
+      };
+    };
+  };
+};
 
 function pauseOn() {
   setModal(!modal)
-  setIsWaitingPlayerOne(false) 
+  setIsWaitingPlayerOne(false); 
   setIsWaitingPlayerTwo(false);
-}
+};
 
 function pauseOf() {
   setModal(!modal)
   if (playerOn === 1) {
-    setIsWaitingPlayerOne( true)
-    setIsWaitingPlayerTwo(false)
+    setIsWaitingPlayerOne( true);
+    setIsWaitingPlayerTwo(false);
   } else {
-    setIsWaitingPlayerOne(false)
-    setIsWaitingPlayerTwo(true)
-  }
-}
+    setIsWaitingPlayerOne(false);
+    setIsWaitingPlayerTwo(true);
+  };
+};
 function playVsCpu() {
-  setCpuMode(true)
-}
+  setCpuMode(true);
+};
   function playVsPlayer() {
         setCpuMode(false)
-      }
+  };
 
   return (
     <div className="App ">
@@ -348,7 +350,6 @@ function playVsCpu() {
               modal={modal} 
               pauseOn={pauseOn} 
               pauseOf={pauseOf}
-              cpuOn={cpuOn}
               cpuMode={cpuMode}
               />
             }/>

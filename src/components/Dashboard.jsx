@@ -9,8 +9,8 @@ export default function Dashboard({
     discs, 
     playerTurn,  
     playerOn, 
-    columnValue, 
-    cpuOn}) {
+    columnValue
+    }) {
 
     const markerRed = `url(${marker_red })`;
     const markerYellow = `url(${marker_yellow })`;
@@ -47,7 +47,7 @@ export default function Dashboard({
                             id={disc.id} 
                             winnerDiscs={winnerDiscs} 
                             selectDisc={() => playerTurn(disc.columnValue)}
-                            cpuOn={cpuOn}
+                            animationHeight={disc.rowValue}
                         />
                     )}
                 </div> 

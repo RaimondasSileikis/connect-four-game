@@ -58,11 +58,19 @@
          span {
             position: absolute;
             visibility: hidden;
-            width: 2.125rem;
-            height: 2.1125rem;
+            width: 50%;
+            height: 50%;
             border-radius: 50%;
             border: 6px solid hsl( var(--clr-white) );
-            transform: translate(-50%, -50%);
+            transform: translate(50%, -50%);
+            left: 0;
+            bottom: 0;
+            z-index: 100;
         }
     }
+}
+
+@keyframes drop {
+    70%{transform :translateY(10%)}
+    100%{transform :translateY(0%)}
 }

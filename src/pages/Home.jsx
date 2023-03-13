@@ -23,7 +23,6 @@ export default function Home({
     modal,
     pauseOn,
     pauseOf,
-    cpuOn,
     cpuMode
     }) {
     
@@ -54,7 +53,6 @@ export default function Home({
                         winnerDiscs={winnerDiscs}
                         playerOn={ playerOn} 
                         columnValue={columnValue}
-                        cpuOn={cpuOn}
                     />
                     <CounterBoxTwo 
                         counterPlayerTwo={counterPlayerTwo}
