@@ -8,6 +8,8 @@ export default function Discs({
     id, 
     winnerDiscs, 
     selectDisc,
+    handleMouseOver,
+    handleMouseOut
     }) {
 
     function styleWinnerDisc(i) {
@@ -31,11 +33,16 @@ export default function Discs({
 
     return (
      
-        <button className='disc' onClick={selectDisc} style={styleDisc}>
-            <span  style={styleWinnerDisc(0)} ></span>{player}
-            <span  style={styleWinnerDisc(1)} ></span>
-            <span  style={styleWinnerDisc(2)} ></span>
-            <span  style={styleWinnerDisc(3)} ></span>
+        <button
+            className='disc'  
+            onMouseOver={handleMouseOver}
+            onMouseOut={handleMouseOut} 
+            onClick={selectDisc} 
+            style={styleDisc}>
+                <span  style={styleWinnerDisc(0)} ></span>
+                <span  style={styleWinnerDisc(1)} ></span>
+                <span  style={styleWinnerDisc(2)} ></span>
+                <span  style={styleWinnerDisc(3)} ></span>
         </button>
     )
 };

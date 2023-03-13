@@ -9,7 +9,9 @@ export default function Dashboard({
     discs, 
     playerTurn,  
     playerOn, 
-    columnValue
+    columnValue,
+    handleMouseOver,
+    handleMouseOut
     }) {
 
     const markerRed = `url(${marker_red })`;
@@ -24,7 +26,7 @@ export default function Dashboard({
 
     return (
     
-        <div  className='dashboard flex'>
+        <div className='dashboard flex'>
                 <img className='board-black' src={board_layer_black_large} alt="Dashboard" />
                 <img className='board-white' src={board_layer_white_large} alt="Dashboard" />
     
@@ -48,6 +50,8 @@ export default function Dashboard({
                             winnerDiscs={winnerDiscs} 
                             selectDisc={() => playerTurn(disc.columnValue)}
                             animationHeight={disc.rowValue}
+                            handleMouseOver={() =>handleMouseOver(disc.columnValue)}
+                            handleMouseOut={() =>handleMouseOut(disc.columnValue)}
                         />
                     )}
                 </div> 

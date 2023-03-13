@@ -25,6 +25,7 @@ function App() {
   const [modal, setModal] = useState(false);
   const [cpuOn, setCpuOn] = useState(false);
   const [cpuMode, setCpuMode] = useState(false);
+  const [isHovering, setIsHovering] = useState(false);
  
   const delay = 1000;
 
@@ -194,44 +195,44 @@ function App() {
     };
   };
 
-function checkDischMatch(discOne, discTwo, discThree, discFour) {
-  return (
-    discOne === discTwo &&
-    discOne === discThree &&
-    discOne === discFour &&
-    discOne !== 0
-  );
-};
+  function checkDischMatch(discOne, discTwo, discThree, discFour) {
+    return (
+      discOne === discTwo &&
+      discOne === discThree &&
+      discOne === discFour &&
+      discOne !== 0
+    );
+  };
 
-function returnDiscValues(columnValue, rowValue) {
-  const disc = discs.filter(disc =>
-    disc.columnValue === columnValue && disc.rowValue === rowValue)[0];
-    return disc;
-};
+  function returnDiscValues(columnValue, rowValue) {
+    const disc = discs.filter(disc =>
+      disc.columnValue === columnValue && disc.rowValue === rowValue)[0];
+      return disc;
+  };
 
-function horizontalCondition() {
-  for (let row = 1; row < 7; row++) {
-    for (let col = 1; col < 5; col++) {
-      const discOne = returnDiscValues(col, row);
-      const discTwo = returnDiscValues(col + 1, row);
-      const discThree = returnDiscValues(col + 2, row);
-      const discFour = returnDiscValues(col + 3, row);
-          if (
-              checkDischMatch(
-                discOne.player,
-                discTwo.player,
-                discThree.player,
-                discFour.player
-                )
-              ){
-          showWinner(discOne, discTwo, discThree, discFour);
-          return true
-        }    else {
-        continue;
+  function horizontalCondition() {
+    for (let row = 1; row < 7; row++) {
+      for (let col = 1; col < 5; col++) {
+        const discOne = returnDiscValues(col, row);
+        const discTwo = returnDiscValues(col + 1, row);
+        const discThree = returnDiscValues(col + 2, row);
+        const discFour = returnDiscValues(col + 3, row);
+            if (
+                checkDischMatch(
+                  discOne.player,
+                  discTwo.player,
+                  discThree.player,
+                  discFour.player
+                  )
+                ){
+            showWinner(discOne, discTwo, discThree, discFour);
+            return true
+          }    else {
+          continue;
+        };
       };
     };
   };
-};
 
 function verticalCondition() {
   for (let col = 1; col < 8; col++) {
@@ -257,65 +258,80 @@ function verticalCondition() {
   };
 };
 
-function diagonalCondition() {
-  for (let col = 1; col < 5; col++) {
-    for (let row = 1; row < 4; row++) {
-      const discOne = returnDiscValues(col, row)
-      const discTwo = returnDiscValues(col + 1, row + 1);
-      const discThree = returnDiscValues(col + 2, row + 2);
-      const discFour = returnDiscValues(col + 3, row + 3);
-      const discFive = returnDiscValues(col + 3, row);
-      const discSix = returnDiscValues(col + 2, row + 1);
-      const discSeven = returnDiscValues(col + 1, row + 2);
-      const discEight = returnDiscValues(col, row + 3);
-      if (
-        checkDischMatch(
-          discOne.player,
-          discTwo.player,
-          discThree.player,
-          discFour.player
-          )
-      ) {
-        showWinner(discOne, discTwo, discThree, discFour);
-        return true;
-      } else if (
-        checkDischMatch(
-          discFive.player,
-          discSix.player,
-          discSeven.player,
-          discEight.player
-          )
-      ) {
-        showWinner(discFive, discSix, discSeven, discEight);
-        return true;
-      } else {
-        continue;
+  function diagonalCondition() {
+    for (let col = 1; col < 5; col++) {
+      for (let row = 1; row < 4; row++) {
+        const discOne = returnDiscValues(col, row)
+        const discTwo = returnDiscValues(col + 1, row + 1);
+        const discThree = returnDiscValues(col + 2, row + 2);
+        const discFour = returnDiscValues(col + 3, row + 3);
+        const discFive = returnDiscValues(col + 3, row);
+        const discSix = returnDiscValues(col + 2, row + 1);
+        const discSeven = returnDiscValues(col + 1, row + 2);
+        const discEight = returnDiscValues(col, row + 3);
+        if (
+          checkDischMatch(
+            discOne.player,
+            discTwo.player,
+            discThree.player,
+            discFour.player
+            )
+        ) {
+          showWinner(discOne, discTwo, discThree, discFour);
+          return true;
+        } else if (
+          checkDischMatch(
+            discFive.player,
+            discSix.player,
+            discSeven.player,
+            discEight.player
+            )
+        ) {
+          showWinner(discFive, discSix, discSeven, discEight);
+          return true;
+        } else {
+          continue;
+        };
       };
     };
   };
-};
 
-function pauseOn() {
-  setModal(!modal)
-  setIsWaitingPlayerOne(false); 
-  setIsWaitingPlayerTwo(false);
-};
-
-function pauseOf() {
-  setModal(!modal)
-  if (playerOn === 1) {
-    setIsWaitingPlayerOne( true);
+  function pauseOn() {
+    setModal(!modal)
+    setIsWaitingPlayerOne(false); 
     setIsWaitingPlayerTwo(false);
-  } else {
-    setIsWaitingPlayerOne(false);
-    setIsWaitingPlayerTwo(true);
   };
-};
-function playVsCpu() {
-  setCpuMode(true);
-};
+
+  function pauseOf() {
+    setModal(!modal)
+    if (playerOn === 1) {
+      setIsWaitingPlayerOne( true);
+      setIsWaitingPlayerTwo(false);
+    } else {
+      setIsWaitingPlayerOne(false);
+      setIsWaitingPlayerTwo(true);
+    };
+  };
+
+  function playVsCpu() {
+    setCpuMode(true);
+  };
+
   function playVsPlayer() {
         setCpuMode(false)
+  };
+
+
+
+  function handleMouseOver(column){
+    setIsHovering(true);
+    setColumnValue(column)
+    console.log(isHovering);
+  };
+
+  function handleMouseOut (column){
+    setIsHovering(false);
+    setColumnValue(column)
   };
 
   return (
@@ -351,6 +367,8 @@ function playVsCpu() {
               pauseOn={pauseOn} 
               pauseOf={pauseOf}
               cpuMode={cpuMode}
+              handleMouseOver={handleMouseOver}
+              handleMouseOut={handleMouseOut}
               />
             }/>
         </Routes>

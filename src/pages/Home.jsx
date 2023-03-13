@@ -23,7 +23,9 @@ export default function Home({
     modal,
     pauseOn,
     pauseOf,
-    cpuMode
+    cpuMode,
+    handleMouseOver,
+    handleMouseOut
     }) {
     
     return (
@@ -53,6 +55,8 @@ export default function Home({
                         winnerDiscs={winnerDiscs}
                         playerOn={ playerOn} 
                         columnValue={columnValue}
+                        handleMouseOver={handleMouseOver}
+                        handleMouseOut={handleMouseOut}
                     />
                     <CounterBoxTwo 
                         counterPlayerTwo={counterPlayerTwo}
