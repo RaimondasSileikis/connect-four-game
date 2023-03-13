@@ -57,7 +57,7 @@ function App() {
   if (cpuOn === true) {
     setTimeout(() => {
     cpuTurn() 
-  }, rand(100, 300));
+  }, rand(200, 400));
 };
 
   if (winnerPlayer === null) {
@@ -154,8 +154,8 @@ function App() {
 
   function getRandomDisc() {
     const isFree = discs.filter(disc => disc.player === 0);
-    const cpuChoice = isFree[rand(0, isFree.length - 1)].id;
-      return cpuChoice;
+    const cpuColumnValue = isFree[rand(0, isFree.length - 1)].columnValue;
+      return cpuColumnValue;
   };
 
   function cpuTurn() {
@@ -164,25 +164,31 @@ function App() {
     setCpuOn(false);
   };
 
-  function playerTurn(id) {
+  function playerTurn(column) {
     const playerOnMe = playerOn;
     if (cpuOn === false) {
-      selectDisc(id, playerOnMe);
+      selectDisc(column, playerOnMe);
     };
  };
 
-  function selectDisc(discId, player) {
+function findDisc(column) {
+  const columArr = discs.filter(disc => 
+     disc.columnValue === column && disc.player === 0
+  );
+  return columArr[columArr.length - 1].id
+}
+
+  function selectDisc(column, player) {
     if (winnerPlayer === null) {
       setPlayerOn(player === 1 ? 2 : 1);
       setDiscs(oldDisc => oldDisc.map(disc => {
-        return disc.id === discId ? 
+        return disc.id === findDisc(column) ? 
             {...disc, isFree: !disc.isFree, player: player } :
             disc
     }));
     startTimer()
     cpuMode === true ? setCpuOn(true) : setCpuOn(false);
-    const disc = discs.filter(disc =>disc.id === discId)[0];
-    setColumnValue(disc.columnValue);
+    setColumnValue(column);
     };
   };
 
