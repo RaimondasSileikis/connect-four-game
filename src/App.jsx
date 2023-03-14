@@ -15,7 +15,7 @@ function App() {
   const [winnerDiscs, setWinnerDiscs] = useState([]);
   const [counterPlayerOne, setCounterPlayerOne] = useState(0);
   const [counterPlayerTwo, setCounterPlayerTwo] = useState(0);
-  const [columnValue, setColumnValue] = useState(0);
+  const [columnValue, setColumnValue] = useState(playerStartGame);
   const [timePlayerOne, setTimePlayerOne] = useState(30);
   const [timePlayerTwo, setTimePlayerTwo] = useState(30);
   const [isRunningPlayerOne, setIsRunningPlayerOne] = useState(false);
@@ -26,7 +26,8 @@ function App() {
   const [cpuOn, setCpuOn] = useState(false);
   const [cpuMode, setCpuMode] = useState(false);
   const [isHovering, setIsHovering] = useState(false);
- 
+  const [isRunningCpu ,setIsRunningCpu] = useState(false);
+  const cpuTurnDelay = rand(200, 1000);
   const delay = 1000;
 
   useInterval(() => {
@@ -36,6 +37,13 @@ function App() {
   useInterval(() => {
     setTimePlayerTwo(timePlayerTwo >=1 ? timePlayerTwo - 1 : 0);
   }, isRunningPlayerTwo && isWaitingPlayerTwo ? delay : null);
+
+  useInterval(() => {
+    if (cpuOn) {
+      setIsRunningCpu(true);
+      cpuTurn();
+    }
+  }, cpuTurnDelay);
 
   function useInterval(callback, delay) {
     const savedCallback = useRef();
@@ -54,17 +62,6 @@ function App() {
     };
   }, [delay]);
 };
-
-  useEffect(() => {
-      if (cpuOn === true) {
-       const id = setTimeout(() => {
-        cpuTurn() 
-      }, rand(500, 1000));
-      return () => {
-        clearInterval(id)
-      }
-    };
-  }, [cpuOn]);
 
   if (winnerPlayer === null) {
     if (timePlayerTwo === 0 && timePlayerOne > 0) {
@@ -98,11 +95,11 @@ function App() {
     setPlayerStartGame(playerStartGame === 1 ? 2 : 1)
     setPlayerOn(playerStartGame === 1 ? 2 : 1);
     setWinnerPlayer(null);
-    setColumnValue(0);
     stopTimer(playerStartGame);
     if (cpuMode) {
       setCpuOn(playerStartGame === 1 ? !cpuOn : cpuOn);
     };
+    setIsRunningCpu(false);
   };
 
   function restartNewTable() {
@@ -110,7 +107,6 @@ function App() {
     setPlayerStartGame(1);
     setPlayerOn(1);
     setWinnerPlayer(null);
-    setColumnValue(0);
     setCounterPlayerOne(0);
     setCounterPlayerTwo(0);
     stopTimer(2);
@@ -164,15 +160,16 @@ function App() {
       return cpuColumnValue;
   };
 
-  const cpuTurn = () => {
+  function cpuTurn () {
     const playerOnCpu = playerOn;
     selectDisc(getRandomDisc() , playerOnCpu);
+    setIsRunningCpu(false);
     setCpuOn(false);
   };
 
   function playerTurn(column) {
     const playerOnMe = playerOn;
-    if (!cpuOn) {
+    if (!cpuOn && !isRunningCpu) {
       selectDisc(column, playerOnMe);
       cpuMode ? setCpuOn(true) : setCpuOn(false);
     };
@@ -195,7 +192,6 @@ function App() {
     }));
     startTimer()
     setColumnValue(column);
-    cpuMode ? setCpuOn(true) : setCpuOn(false);
     };
   };
 
@@ -326,14 +322,18 @@ function verticalCondition() {
   };
 
   function handleMouseOver(column){
-    setIsHovering(true);
-    setColumnValue(column)
-    console.log(isHovering);
+    if (!cpuOn) {
+      setIsHovering(true);
+      setColumnValue(column);
+      console.log(isHovering);
+    };
   };
 
   function handleMouseOut (column){
+    if (!cpuOn) {
     setIsHovering(false);
-    setColumnValue(column)
+    setColumnValue(column);
+    };
   };
 
   return (
