@@ -18,8 +18,9 @@ export default function TurnPlayer({
     const winsPlayer = [winsPlayerOne, winsPlayerTwo];
     const turnContentCpuMode = playerOn === 1 ? "YOURN TURN" : "CPU'S TURN";
     const turnPlayerTitle = `player ${playerOn}'s turn`;
-    const winsContentCpuMode = playerOn === 2 ? "YOU WIN" : "CPU WINS";
+    const winsContentCpuMode = playerOn === 2 ? "YOU" : "CPU";
     const winsPlayerTitle = `player ${winnerPlayer}`;
+    const winsContent = cpuMode && playerOn === 2 ? "WIN" : "WINS"
   
     const imageTurn = turn_background_red;
     const imageWin = turn_background_yellow;
@@ -45,7 +46,7 @@ export default function TurnPlayer({
             <div hidden={!winnerPlayer ?  true : false}>
                 <div  className='player-box player-wins  '>
                     <h4>{cpuMode ? winsContentCpuMode : winsPlayerTitle }</h4>
-                    <h1>wins</h1>
+                    <h1>{winsContent}</h1>
                     <BtnPlayAgain playAgain={playAgain} />
                 </div>
             </div>
