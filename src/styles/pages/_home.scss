@@ -1,28 +1,30 @@
-.main {
+.home {
     display: grid;
     position: relative;
     justify-items: center;
     background-color: hsl( var(--clr-blue-light) );
-    grid-template-rows: 10vh minmax(80vh, 1fr) 10vh;
+    grid-template-rows: min-content minmax(min-content, 1fr) 9rem;
+    min-width: min-content;
+    min-height: 100vh;
     grid-template-areas: 
         'header'
         'container'
         'footer';
+        gap: 0rem;
 }
-
-.header {
+.home-header {
     display: flex;
     grid-area: header;
     align-items: center;
+    justify-content: space-between;
+    width: 632px;
     margin: 0;
-    padding: 5rem 0;
+    padding: 2rem;
+    .logo {
+    width: 3.25rem;
+    }
 }
-
-.logo {
-    padding: 1rem 10rem;
-    margin-left: 1.1rem;
-}
-.container {
+.home-container {
     display: grid;
     grid-template-columns: 1fr 1fr 1fr;
     grid-template-areas: 
@@ -33,66 +35,166 @@
     align-self: center;
     justify-items: center;
     align-items: center;
+    padding: 0;
+}
+.home-footer {
+    position: absolute;
+    bottom: 0;
+    width: 100%;
 }
 
 @media (max-width: 768px) {
-  .container {
+    .home-header {
+        padding:0;
+    }
+  .home-container {
         display: grid;
+        min-width: max-content;
         grid-template-columns: 1fr 1fr;
         grid-template-rows:1fr min-content;
         grid-template-areas: 
         'counter1 counter2'
         'dashboard dashboard';
         gap: 1.5rem;
-        margin-bottom: 1rem;
-  }
-    .dashboard {
-        grid-area: dashboard;
-    }
-    .header {
-        margin: 0;
-        padding: 0;
-    }
-    .turn {
-       padding: 0.5rem 0;
-    }
-    .counter-box-one {
-        grid-area: counter1;
-        justify-self: flex-start;
-        margin-left: 2rem;
-        img {
-            left: 0;
-            transform: translate(-50%, 50%);
-         }
-    }
-    .counter-box-two {
-        grid-area: counter2;
-        justify-self:flex-end;
-        margin-right: 2rem;
-        img {
-            right: 0;
-             transform: translate(50%, 50%);
-         }
-    }
-    .counter-box-one,
-    .counter-box-two {
-        display: flex;
-        align-items: stretch;
-        flex-direction: row;
-        padding: 0.5em 2.5em;
-        width: 90%;
-        .player-box--content{
+        .dashboard {
+            grid-area: dashboard;
+        }
+        .counter-box-one {
+            grid-area: counter1;
+            justify-self: flex-start;
+            margin-left: 1.5rem;
+            img {
+                left: 0;
+                transform: translate(-50%, 30%);
+             }
+        }
+        .counter-box-two {
+            grid-area: counter2;
+            justify-self:flex-end;
+            margin-right: 1.5rem;
+            img {
+                right: 0;
+                 transform: translate(50%, 30%);
+             }
+        }
+        .counter-box-one,
+        .counter-box-two {
             display: flex;
+            align-items: stretch;
             flex-direction: row;
-            align-items: center;
-            justify-content: space-between;
-            width: 100%;
+            padding: 0.5em 2.5em;
+            width: 90%;
+            .player-box--content{
+                display: flex;
+                flex-direction: row;
+                align-items: center;
+                justify-content: space-between;
+                width: 100%;
+            }
         }
-        
+        .counter-box-two {
+            .player-box--content{
+                flex-direction: row-reverse;
+            }
+        }
     }
-    .counter-box-two {
-        .player-box--content{
-            flex-direction: row-reverse;
+}
+
+@media (max-width: 375px) {
+    .home {
+        min-height: fit-content;
+    }
+    .home-header {
+      padding: 2.5rem 0;
+    }
+    
+    .home-header {
+        width: 335px;
+       .logo {
+           width: 2.5rem;
+       }
+    }
+    .home-container {
+        min-width: min-content;
+        margin-bottom: 4rem;
+        .dashboard {
+            .counter-box-one,
+            .counter-box-two {
+                margin-bottom: 2rem;
+            }
+            .board-large {
+                display: none;
+            }
+            .board-small {
+                display: block;
+            }
+            .discs {
+                margin: 0.25rem 0 0 0.25rem;
+                grid-template-columns: repeat(7, 47px);
+                grid-template-rows: repeat(6, 47px); 
+                .cursor {
+                    span {
+                        display: none;
+                    }
+                }
+            }
         }
+        .counter-box-one,
+        .counter-box-two {
+            display: flex;
+            align-items: center;
+            width: 9rem;
+            padding: 0;
+            margin-bottom: 1rem;
+            .player-box--content{
+                flex-direction: column;
+                padding: 0;
+                margin: 0;
+                h3 {
+                    font-size: 1rem;
+                    line-height:1.3125rem;
+                }
+                h1 {
+                    font-size: 2rem;
+                    line-height:2.55rem;
+                }
+            } 
+        }
+            .counter-box-one {
+                img {
+                    transform: translate(-50%,5%);
+                }
+            }
+            .counter-box-two {
+                img {
+                    transform: translate(50%,5%);
+                }
+            }
+        }
+    .home-footer {
+        .turn {
+             padding-bottom: 5rem;
+        }
+    }
+   .menu-container {
+        .btn-play {
+            width: 20.5rem;
+            }
+            .rules-container {
+            width: 22rem;
+            }
+
+        } 
+    .menu-start {
+        .menu-box {
+        padding: 0;
+        background-color: transparent;
+        border: none;
+        }
+    }
+    .menu-ingame {
+       .menu-box {
+        padding:2rem 0.8rem;
+        } 
     }
 }

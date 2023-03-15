@@ -1,6 +1,3 @@
-.dashboard {
-    min-width: 632px;
-}
 .dashboard > .discs > .disc:hover{
     cursor: pointer;
 }
@@ -12,14 +9,23 @@
 .dashboard .board-black {
     z-index: 10;
     position: relative;
-    min-width: 632px;
 }
 
 .dashboard .board-white {
     z-index: 30;
     position: absolute;
+}
+
+.dashboard .board-large {
+    display: block;
     min-width: 632px;
 }
+
+.dashboard .board-small {
+     display: none;
+     min-width: 335px;
+}
+
 .cursor {
     display: grid;
     grid-template-columns: repeat(7, 88px);
@@ -54,7 +60,6 @@
         height: 80%;
         background-size: cover;
         background-repeat: no-repeat;
-    
          span {
             position: absolute;
             visibility: hidden;

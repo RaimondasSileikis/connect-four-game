@@ -13,6 +13,7 @@
 .logo img {
     padding: 1rem 0;
 }
+
 .menu-box {
     display: grid;
     gap: 1.5rem;
@@ -22,6 +23,7 @@
     border-radius: 2.5rem;
     background-color: hsl( var(--clr-blue-light) );
     border: 3px solid hsl( var(--clr-black) );
+    transform: translateY(-12%);
 }
 
 .menu-ingame{

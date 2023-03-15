@@ -7,7 +7,7 @@ export default function StartPage({playVsCpu, playVsPlayer}) {
 
     return (
     
-        <div className='menu-container'>
+        <div className='menu-container menu-start'>
              <div className='menu-box'>
                 <div className='logo'>
                     <img src={logo} alt="logo" />

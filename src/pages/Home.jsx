@@ -35,8 +35,8 @@ export default function Home({
                 pauseOf={pauseOf}
                 restartNewTable={restartNewTable}
             />
-            <div className='main'>
-                <header className='header flex'>
+            <div className='home'>
+                <header className='home-header flex'>
                     <BtnMenu pauseOn={pauseOn} />
                     <div className='logo'>
                         <img src={logo} alt="" />
@@ -44,7 +44,7 @@ export default function Home({
                     <BtnRestart restartNewTable={restartNewTable}/>
                 </header>
 
-                <main className='container'>
+                <main className='home-container'>
                     <CounterBoxOne 
                         counterPlayerOne={counterPlayerOne}
                         cpuMode={cpuMode}
@@ -63,14 +63,17 @@ export default function Home({
                         cpuMode={cpuMode}
                     />
                 </main>
-
-                <TurnPlayer 
+                <footer className='home-footer'>
+                     <TurnPlayer 
                     playAgain={playAgain} 
                     winnerPlayer={winnerPlayer} 
                     playerOn={playerOn} 
                     timePlayerOne={timePlayerOne} 
                     timePlayerTwo={timePlayerTwo}
-                />
+                    cpuMode={cpuMode}
+                    />
+                </footer>
+               
             </div>
         </>
     )

@@ -2,6 +2,8 @@ import marker_red from '../assets/images/marker-red.svg';
 import marker_yellow from '../assets/images/marker-yellow.svg';
 import board_layer_black_large from '../assets/images/board-layer-black-large.svg';
 import board_layer_white_large from '../assets/images/board-layer-white-large.svg';
+import board_layer_black_small from '../assets/images/board-layer-black-small.svg';
+import board_layer_white_small from '../assets/images/board-layer-white-small.svg';
 import Discs from './Discs';
 
 export default function Dashboard({
@@ -27,8 +29,10 @@ export default function Dashboard({
     return (
     
         <div className='dashboard flex'>
-                <img className='board-black' src={board_layer_black_large} alt="Dashboard" />
-                <img className='board-white' src={board_layer_white_large} alt="Dashboard" />
+                <img className='board-black board-large ' src={board_layer_black_large} alt="Dashboard" />
+                <img className='board-white board-large ' src={board_layer_white_large} alt="Dashboard" />
+                <img className='board-black board-small ' src={board_layer_black_small} alt="Dashboard" />
+                <img className='board-white board-small ' src={board_layer_white_small} alt="Dashboard" />
     
                 <div className='discs'>
                     <div  className='cursor'>

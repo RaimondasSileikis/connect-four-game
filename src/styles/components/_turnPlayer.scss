@@ -1,26 +1,28 @@
 .turn {
     display: grid;
     grid-area: footer;
-    position:absolute;
     place-self: stretch;
     justify-content: center;
     background-color: hsl( var(--clr-blue-dark) );
     border-radius: 60px 60px 0px 0px;
     width: 100%;
-    padding: 2rem 0;
-    bottom: 0;
+    padding-bottom: 2rem;
     .turn-time {
-        position: absolute;
+        position:absolute;
         place-self: center;
+         text-align: center;
         z-index:70;
     }
-   
-        :not(first-child) {
-            text-align: center;
-            z-index: 60;
-        }
-
+    img {
+        width: 11.938rem;
+        z-index: 60;    
+    }
+    :last-child {
+        text-align: center;
+        z-index: 60;
+    }
 }
+
 .turn-player-one {
     color: hsl( var(--clr-white) );
 }
@@ -29,10 +31,12 @@
     color: hsl( var(--clr-black) );
     
 }
+
 .wins-player-one {
     color: hsl( var(--clr-black) );
     background-color: hsl( var(--clr-red) );
 }
+
 .wins-player-two {
     background-color: hsl( var(--clr-yellow) );
 }
@@ -41,14 +45,10 @@
     flex-direction: column;
     place-self: center;
     padding: 0.8em;
-    
     color:hsl( var(--clr-black) );
     background-color:hsl( var(--clr-white) );
     z-index: 60;
     h1 {
         padding: 0 1em;
     }
-}
-.btn-playagain {
-    background-color:hsl( var(--clr-blue-dark) );
 }
